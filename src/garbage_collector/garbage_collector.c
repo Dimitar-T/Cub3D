@@ -27,15 +27,11 @@ void	*gc_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (!ptr)
-	{
-		printf("hello");
 		return (NULL);
-	}
 		
 	new_node = malloc(sizeof(t_garbage_collector));
 	if (!new_node)
 	{
-		printf("hello");
 		free(ptr);
 		return (NULL);
 	}
@@ -43,7 +39,6 @@ void	*gc_malloc(size_t size)
 	new_node->content = ptr;
 	new_node->next = *mem_list;
 	*mem_list = new_node;
-	printf("%p\n",ptr);
 	return (ptr);
 }
 

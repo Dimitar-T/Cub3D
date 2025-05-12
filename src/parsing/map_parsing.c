@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:56:45 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/05/11 12:07:13 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:32:11 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	get_fd(char *str)
 	
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		exit_fail("Cub3d: Error opening the file check if the file exists and if the permissions are set correctlly");
+		exit_fail("Cub3D: Error opening the file check if the file exists and if the permissions are set correctlly");
 	return (fd);
 }
 
@@ -84,12 +84,11 @@ char	**map_parsing(char **argv)
 	line_count = count_lines(argv[1]);
 	map  = gc_malloc((sizeof(char *) * line_count + 1));
 	if (map == NULL)
-		exit_fail("Cub3D: 123 Memory allocation error");
+		exit_fail("Cub3D: Memory allocation error");
 	i = -1;
 	fd = get_fd(argv[1]);
 	while ((map[++i] = get_next_line(fd)))
 	{
-		printf("line count: %s %d, ini i:%d\n",map[i],line_count, i);
 		gc_track(map[i]);
 		if(map[i] == NULL && i != line_count)
 		{

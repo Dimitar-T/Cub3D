@@ -1,0 +1,15 @@
+# === MacOS shit ===
+.DS_Store
+
+# === Editor files ===
+.vscode/
+
+# === OBJ and executable ===
+cub3d
+*.o
+
+# === Libraries ===
+*.a
+
+# === Debug files ===
+*.dSYM/
