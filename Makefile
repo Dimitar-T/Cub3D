@@ -35,10 +35,11 @@ $(NAME): $(OBJ)
 
 clean:
 	rm -rf $(OBJ_DR)
+	$(MAKE) -C $(LIBFT) clean
+	$(MAKE) -C $(LIBMLX)/build clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C libft fclean
+	$(MAKE) -C $(LIBFT) fclean
 
 re: fclean all
 
