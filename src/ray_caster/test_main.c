@@ -19,6 +19,54 @@ void draw_player(t_data *game)
     }
 }
 
+void move_player(mlx_key_data_t data, t_player *player)
+{
+    if (data.key == MLX_KEY_W)
+    {
+    player->px += player->pdx * player->speed;
+    player->py += player->pdy * player->speed;
+    }
+    else if (data.key == MLX_KEY_S)
+    {
+    player->px -= player->pdx * player->speed;
+    player->py -= player->pdy * player->speed;
+    }
+    else if (data.key == MLX_KEY_A)
+    {
+    player->px += cos(player->pa - M_PI / 2) * player->speed;
+    player->py += sin(player->pa - M_PI / 2) * player->speed;
+    }
+    else if (data.key == MLX_KEY_D)
+    {
+    player->px += cos(player->pa + M_PI / 2) * player->speed;
+    player->py += sin(player->pa + M_PI / 2) * player->speed;
+    }
+}
+
+void change_direction(mlx_key_data_t data, t_player *player)
+{
+    if (data.key == MLX_KEY_RIGHT)
+    {
+        player->pa +=  player->speed / 10;
+        if (player->pa < 0)
+        player->pa += 2 * M_PI;
+        if (player->pa >= 2 * M_PI)
+        player->pa -= 2 * M_PI;
+        player->pdx = cos(player->pa);
+        player->pdy = sin(player->pa);
+    }
+    else if (data.key == MLX_KEY_LEFT)
+    {
+        player->pa -= player->speed / 10;
+        if (player->pa < 0)
+        player->pa += 2 * M_PI;
+        if (player->pa >= 2 * M_PI)
+        player->pa -= 2 * M_PI;
+        player->pdx = cos(player->pa);
+        player->pdy = sin(player->pa);
+    }
+}
+
 void key_callback(mlx_key_data_t data, void *param)
 {
     t_data  *game = (t_data*)param;
@@ -28,14 +76,11 @@ void key_callback(mlx_key_data_t data, void *param)
     {
         if (data.key == MLX_KEY_ESCAPE)
         mlx_close_window(game->mlx);
-        else if (data.key == MLX_KEY_W)
-            player->py -= 1;
-        else if (data.key == MLX_KEY_S)
-            player->py += 1;
-        else if (data.key == MLX_KEY_A)
-            player->px -= 1;
-        else if (data.key == MLX_KEY_D)
-            player->px += 1;
+        else if (data.key == MLX_KEY_W || data.key == MLX_KEY_S
+                || data.key == MLX_KEY_A || data.key == MLX_KEY_D)
+        move_player(data, player);
+        else if (data.key == MLX_KEY_RIGHT || data.key == MLX_KEY_LEFT)
+        change_direction(data, player);
         draw_player(game);
         // draw_rays(game, player, game->ray, game->map);
     }
