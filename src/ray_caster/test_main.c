@@ -17,6 +17,7 @@ void draw_player(t_data *game)
         mlx_put_pixel(game->img, (int)game->player->px, (int)game->player->py + 1, color);
         mlx_put_pixel(game->img, (int)game->player->px, (int)game->player->py - 1, color);
     }
+    draw_rays(game, game->player, game->ray, game->map);
 }
 
 void move_player(mlx_key_data_t data, t_player *player)
@@ -48,20 +49,32 @@ void change_direction(mlx_key_data_t data, t_player *player)
     if (data.key == MLX_KEY_RIGHT)
     {
         player->pa +=  player->speed / 10;
-        if (player->pa < 0)
-        player->pa += 2 * M_PI;
-        if (player->pa >= 2 * M_PI)
-        player->pa -= 2 * M_PI;
+        // player->pa = fmod(player->pa, 2 * M_PI);
+        //  if (player->pa < 0)
+        // player->pa += 2 * M_PI;
+        //         if (player->pa >= 2 * M_PI)
+        // player->pa -= 2 * M_PI;
+
+        // if (player->pa < 0)
+        // player->pa += 2 * M_PI;
+        // if (player->pa >= 2 * M_PI)
+        // player->pa -= 2 * M_PI;
         player->pdx = cos(player->pa);
         player->pdy = sin(player->pa);
     }
     else if (data.key == MLX_KEY_LEFT)
     {
         player->pa -= player->speed / 10;
-        if (player->pa < 0)
-        player->pa += 2 * M_PI;
-        if (player->pa >= 2 * M_PI)
-        player->pa -= 2 * M_PI;
+        // player->pa = fmod(player->pa, 2 * M_PI);
+// if (player->pa < 0)
+//     player->pa += 2 * M_PI;
+//             if (player->pa >= 2 * M_PI)
+//         player->pa -= 2 * M_PI;
+
+        // if (player->pa < 0)
+        // player->pa += 2 * M_PI;
+        // if (player->pa >= 2 * M_PI)
+        // player->pa -= 2 * M_PI;
         player->pdx = cos(player->pa);
         player->pdy = sin(player->pa);
     }
@@ -82,7 +95,7 @@ void key_callback(mlx_key_data_t data, void *param)
         else if (data.key == MLX_KEY_RIGHT || data.key == MLX_KEY_LEFT)
         change_direction(data, player);
         draw_player(game);
-        // draw_rays(game, player, game->ray, game->map);
+        draw_rays(game, player, game->ray, game->map);
     }
 }
 
