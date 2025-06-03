@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:21 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/05/31 23:43:17 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:25:10 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 #include "../../libft/libft.h"
-#include "cub3d.h"
+#include "../cub3d.h"
 // # include "../../MLX42/include/MLX42/MLX42_Int.h"
 
 

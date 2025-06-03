@@ -8,7 +8,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 #include "../../libft/libft.h"
-#include "cub3d.h"
+#include "../cub3d.h"
 // # include "../../MLX42/include/MLX42/MLX42_Int.h"
 
 typedef struct s_player
@@ -51,3 +51,5 @@ typedef struct s_data
 }               t_data;
 
 t_data *init_game(char *m);
+
+#endif
