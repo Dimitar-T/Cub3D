@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:21 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/03 13:25:10 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:03:25 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ typedef enum s_ray_dir
     RIGHT
 }               t_ray_dir;
 
+typedef enum s_tex_type
+{
+    NORTH,
+    SOUTH,
+    WEST,
+    EAST
+}
+            t_tex_type;
 // typedef struct s_player
 // {
 //     double             px;
@@ -74,4 +82,9 @@ typedef enum s_ray_dir
 // t_data *init_game(char *m);
 
 void cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map);
+void minimap(t_data *game);
+int	get_texture_color(mlx_texture_t *texture, int x, int y);
+double   get_tx(t_ray *rays, mlx_texture_t *img);
+int get_ty(int y_screen, int wall_top, int wall_height, mlx_texture_t *tex);
+mlx_texture_t *choose_tex(t_data *game);
 #endif

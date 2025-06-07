@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/05/31 23:44:15 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:23:06 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_player   *init_player(t_map *map)
     init_pos(map->m, player);
     player->pdx = cos(player->pa);
     player->pdy = sin(player->pa);
-    player->speed = 4.0;
+    player->speed = 10.0;
     return(player);
 }
 
@@ -126,6 +126,15 @@ t_ray   *init_rays(t_player *player)
     return(ray);
 }
 
+void init_textures(t_data *game)
+{
+    game->tn = mlx_load_png("../textures/0.png");
+    game->ts = mlx_load_png("../textures/0.png");
+    game->te = mlx_load_png("../textures/0.png");
+    game->tw = mlx_load_png("../textures/0.png");
+    if (game->tn == NULL)
+}
+
 t_data *init_game(char *m)
 {
     t_player    *player;
@@ -141,6 +150,7 @@ t_data *init_game(char *m)
     game->win_height = game->map->my * 64;
     game->mlx = mlx_init(game->win_width, game->win_height, "Carto", true);
     game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
+    init_textures(game);
     mlx_image_to_window(game->mlx, game->img, 0, 0);
     return(game);
 }
