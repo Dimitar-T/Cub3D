@@ -6,11 +6,18 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/07 16:04:32 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:21:49 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
+
+#define MINIMAP_WIDTH 200
+#define MINIMAP_HEIGHT 150
+#define MINIMAP_TS 8
+#define MINIMAP_OFFSET_X 10
+#define MINIMAP_OFFSET_Y 10
+#define MINIMAP_SCALE 0.2
 
 int	draw_walls(t_data *game, int start, int wallheight, int y)
 {
@@ -22,7 +29,7 @@ int	draw_walls(t_data *game, int start, int wallheight, int y)
 	tex = choose_tex(game);
 	tex_x = get_tx(game->ray, tex);
 	tex_y = get_ty(y, start, wallheight, tex);
-	color = get_texture_color(game->tn, tex_x, tex_y);
+	color = get_texture_color(tex, tex_x, tex_y);
 	return (color);
 }
 
@@ -36,16 +43,19 @@ void	draw_scene(int start, int end, t_data *game, int x)
 	y = 0;
 	while (y < start)
 	{
-		mlx_put_pixel(game->img, x, y, 0x191970FF);
+		game->part = 1;
+		mlx_put_pixel(game->img, x, y, draw_walls(game, start, wallheight, y));
 		y++;
 	}
 	while (y <= end)
 	{
+		game->part = 0;
 		mlx_put_pixel(game->img, x, y, draw_walls(game, start, wallheight, y));
 		y++;
 	}
 	while (y < game->win_height)
 	{
+		game->part = 2;
 		mlx_put_pixel(game->img, x, y, 0x404040FF);
 		y++;
 	}
@@ -124,4 +134,5 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		calc_walls(x, game, ray, player);
 		x++;
 	}
+	minimap(game);
 }

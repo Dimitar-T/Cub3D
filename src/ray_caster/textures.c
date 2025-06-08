@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/07 16:04:24 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:18:49 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ double	get_tx(t_ray *ray, mlx_texture_t *tex)
 int	get_ty(int y, int wall_top, int wall_height, mlx_texture_t *tex)
 {
 	int	tex_y;
-
 	if (wall_height <= 0 || !tex)
 		return (0);
-	tex_y = (int)(((double)(y - wall_top) / (double)wall_height) * tex->height);
+	tex_y = (int)(((double)(y - wall_top) / (double)wall_height)
+			* tex->height);
 	if (tex_y < 0)
 		tex_y = 0;
 	if (tex_y >= (int)tex->height)
@@ -55,7 +55,11 @@ int	get_ty(int y, int wall_top, int wall_height, mlx_texture_t *tex)
 
 mlx_texture_t	*choose_tex(t_data *game)
 {
-	if (game->ray->vert == 1)
+	if (game->part == 1)
+		return (game->s);
+	else if (game->part == 2)
+		return (game->f);
+	else if (game->ray->vert == 1)
 	{
 		if (game->ray->rdx > 0)
 			return (game->tw);

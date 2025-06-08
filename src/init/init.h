@@ -1,4 +1,4 @@
-#ifndef INIT_H
+# ifndef INIT_H
 # define INIT_H
 
 #include <math.h>
@@ -18,6 +18,8 @@ typedef struct s_player
     double             pdx;
     double             pdy;
     double             pa;
+    int                xo;
+    int                yo;
     double             speed;
 }               t_player;
 
@@ -29,6 +31,8 @@ typedef struct s_ray
     double             rdx;
     double             rdy;
     int                vert;
+    double             mm_rx;
+    double             mm_ry;
 
 }               t_ray;
 
@@ -66,6 +70,9 @@ typedef struct s_data
     mlx_texture_t   *ts;
     mlx_texture_t   *te;
     mlx_texture_t   *tw;
+    mlx_texture_t   *f;
+    mlx_texture_t   *s;
+    int             part;
     int             win_width;
     int             win_height;
     // t_sprite        *sprites[50];
