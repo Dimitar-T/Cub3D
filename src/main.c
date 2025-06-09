@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/09 14:28:16 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:25:22 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int main(int argc, char **argv)
 	if (map_parsing(map) == -1)
 		return (-1);
 	(void)map;
-	
+	t_data  *game = init_game(argv[1]);
+    put_img(game);
+    draw_player(game);
+    mlx_key_hook(game->mlx, key_callback, game);
+	mlx_loop(game->mlx);
+    free(game->ray);
+    free(game->map->m);
+    free(game->map);
+    free(game->player);
+    free(game);
+    return(0);
     
 }

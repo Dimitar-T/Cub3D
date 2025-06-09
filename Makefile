@@ -36,11 +36,12 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DR)
+	$(MAKE) -C $(LIBFT) clean
+	$(MAKE) -C $(LIBMLX)/build clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C libft fclean
+	$(MAKE) -C $(LIBFT) fclean
 
 re: fclean all
 
