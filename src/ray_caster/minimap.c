@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:25:20 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/08 16:25:55 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:35:49 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ray_caster.h"
 #define MINIMAP_WIDTH 200
 #define MINIMAP_HEIGHT 150
-#define MINIMAP_TS 8
 #define MINIMAP_OFFSET_X 10
 #define MINIMAP_OFFSET_Y 10
 #define MINIMAP_SCALE (10.0 / 64.0)
