@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/09 15:25:22 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:13:46 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int main(int argc, char **argv)
 	}
 	if (map_parsing(map) == -1)
 		return (-1);
-	(void)map;
-	t_data  *game = init_game(argv[1]);
-    put_img(game);
-    draw_player(game);
+	// (void)map;
+	t_data  *game = init_game(map);
+	cast_rays(game, game->player, game->ray, game->map);
+	minimap(game);
     mlx_key_hook(game->mlx, key_callback, game);
 	mlx_loop(game->mlx);
     free(game->ray);
@@ -46,5 +46,4 @@ int main(int argc, char **argv)
     free(game->player);
     free(game);
     return(0);
-    
 }

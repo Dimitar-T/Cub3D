@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:51:42 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/09 15:32:35 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:00:17 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include "../libft/libft.h"
 #include "./parsing/parsing.h"
 #include "./garbage_collector/garbage_collector.h"
-#include "./ray_caster/ray_caster.h"
 #include "./init/init.h"
+#include "./ray_caster/ray_caster.h"
 #include "./moves/moves.h"
 
 

@@ -73,7 +73,6 @@ void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
 	}
 	else
 		move_player2(data, player, map);
-	printf("px %d py %d\n", (int)player->px / 64, (int)player->py / 64);
 }
 
 void	change_direction(mlx_key_data_t data, t_player *player)
@@ -108,7 +107,6 @@ void	key_callback(mlx_key_data_t data, void *param)
 			move_player(data, player, game->map);
 		else if (data.key == MLX_KEY_RIGHT || data.key == MLX_KEY_LEFT)
 			change_direction(data, player);
-		draw_player(game);
-		draw_rays(game, player, game->ray, game->map);
+		cast_rays(game, player, game->ray, game->map);
 	}
 }

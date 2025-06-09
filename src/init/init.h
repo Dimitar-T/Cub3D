@@ -72,12 +72,14 @@ typedef struct s_data
     mlx_texture_t   *tw;
     mlx_texture_t   *f;
     mlx_texture_t   *s;
+    int             sky_color;
+    int             floor;
     int             part;
     int             win_width;
     int             win_height;
     // t_sprite        *sprites[50];
 }               t_data;
 
-t_data *init_game(char *m);
+t_data *init_game(char **m);
 
 #endif

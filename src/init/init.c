@@ -6,11 +6,11 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/08 16:29:59 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:04:55 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray_caster.h"
+#include "../cub3d.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -73,31 +73,31 @@ t_player   *init_player(t_map *map)
     return(player);
 }
 
-char	**mapsi(char *path)
-{
-	char	*tmap;
-	char	**map;
-	int		fd;
+// char	**mapsi(char *path)
+// {
+// 	char	*tmap;
+// 	char	**map;
+// 	int		fd;
 
-	map = NULL;
-	tmap = malloc(1000 * sizeof(char) + 1);
-	if (!tmap)
-		return (NULL);
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (free(tmap), NULL);
-	if (read(fd, tmap, 1000) < 0)
-		return (free(tmap), NULL);
-	if (close(fd) < 0)
-		return (free(tmap), NULL);
-	map = ft_split(tmap, '\n');
-	if (!map)
-		return (free(tmap), NULL);
-	free(tmap);
-	return (map);
-}
+// 	map = NULL;
+// 	tmap = malloc(1000 * sizeof(char) + 1);
+// 	if (!tmap)
+// 		return (NULL);
+// 	fd = open(path, O_RDONLY);
+// 	if (fd < 0)
+// 		return (free(tmap), NULL);
+// 	if (read(fd, tmap, 1000) < 0)
+// 		return (free(tmap), NULL);
+// 	if (close(fd) < 0)
+// 		return (free(tmap), NULL);
+// 	map = ft_split(tmap, '\n');
+// 	if (!map)
+// 		return (free(tmap), NULL);
+// 	free(tmap);
+// 	return (map);
+// }
 
-t_map   *init_map(char *m)
+t_map   *init_map(char **m)
 {
     t_map *map;
     
@@ -105,7 +105,7 @@ t_map   *init_map(char *m)
     int y = 0;
     if (!map)
     return(NULL);   
-    map->m = mapsi(m);
+    map->m = m;
     map->mx = ft_strlen(map->m[0]);
     while (map->m[y] != NULL)
     y++;
@@ -210,12 +210,11 @@ void init_textures(t_data *game)
     game->s = mlx_load_png("../../textures/sky.png");
 }
 
-t_data *init_game(char *m)
+t_data *init_game(char **m)
 {
-    t_player    *player;
-    t_ray       *ray;
-    t_map       *map;
-    t_data *game = malloc(sizeof(t_data));
+    t_data *game;
+    
+    game = malloc(sizeof(t_data));
     if (!game)
     return(NULL);
     game->map = init_map(m);

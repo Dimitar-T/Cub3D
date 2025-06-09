@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   moves.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:31:01 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/09 15:33:14 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:01:12 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MOVES_H
 # define MOVES_H
 
-#include "ray_caster.h"
+#include "../cub3d.h"
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
