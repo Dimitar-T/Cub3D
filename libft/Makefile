@@ -10,7 +10,7 @@ SRC = ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o \
 	  ft_strmapi.o ft_striteri.o ft_putstr_fd.o ft_putendl_fd.o \
 	  ft_putchar_fd.o ft_putnbr_fd.o ft_printf/ft_print_hex.o\
 	  ft_printf/ft_print_num.o ft_printf/ft_printf.o \
-	  ft_gnl/get_next_line.o ft_gnl/get_next_line_utils.o \
+	  get_next_line/get_next_line.o get_next_line/get_next_line_utils.o \
 	  ft_lstnew_bonus.o ft_lstadd_front_bonus.o ft_lstsize_bonus.o ft_lstlast_bonus.o \
 	  ft_lstadd_back_bonus.o ft_lstdelone_bonus.o ft_lstclear_bonus.o \
 	  ft_lstiter_bonus.o ft_lstmap_bonus.o
@@ -19,7 +19,7 @@ OBJ = $(SRC:.o=.o)
 NAME = libft.a
 HEADER = libft.h
 PRINTF_HEADER = ft_printf/ft_printf.h
-GNL_HEADER = ft_gnl/get_next_line.h
+GNL_HEADER = get_next_line/get_next_line.h
 
 all: $(NAME)
 

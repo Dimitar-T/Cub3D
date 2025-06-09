@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:24:48 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/04/29 14:27:04 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:27:39 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	exit_fail(char *message)
 {
-	perror(message);
+	write(2, message, ft_strlen(message));
+	gc_free_all();
 	exit(EXIT_FAILURE);
 }

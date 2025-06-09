@@ -5,96 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:56:45 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/05/12 15:32:11 by dtrendaf         ###   ########.fr       */
+/*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
+/*   Updated: 2025/06/09 14:37:13 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "parsing.h"
 
-static int	get_fd(char *str)
-{
-	int fd;
-	
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-		exit_fail("Cub3D: Error opening the file check if the file exists and if the permissions are set correctlly");
-	return (fd);
-}
-
-static void file_name_validation(char *argv)
-{
-	int i;
-
-	i = -1;
-	while(argv[++i])
-	{
-		if (argv[i] == '.')
-		{
-			if (ft_strcmp(&argv[i + 1], "cub") == 0)
-				break;
-			exit_fail("CuB3D: Error please provide a *.cub file!");
-		} 
-		else if(argv[i + 1] == '\0')
-			exit_fail("CuB3D: Error please provide a *.cub file!");
-	}
-}
-
-static int count_lines(char *str)
-{
-	int	fd;
-	int	count;
-	char *line;
-	
-	file_name_validation(str);
-	count  = 0; 
-	fd = get_fd(str);
-	while ((line = get_next_line(fd)))
-	{
-		count++;
-		free(line);
-	}
-	close(fd);
-	return (count + 1);
-}
-
-// static void	ft_free(char **string)
+// static void init_config(t_config **check_list)
 // {
-// 	int	i;
-
-// 	if (string == NULL)
-// 		return ;
-// 	i = 0;
-// 	while (string[i] != NULL)
-// 	{
-// 		free(string[i]);
-// 		i++;
-// 	}
-// 	free(string);
+// 	(*check_list)->ceeling_flag = 0;
+// 	(*check_list)->floor_flag = 0;
+// 	(*check_list)->ea_flag = 0;
+// 	(*check_list)->no_flag = 0;
+// 	(*check_list)->so_flag = 0;
+// 	(*check_list)->we_flag = 0;
 // }
 
-char	**map_parsing(char **argv)
+
+/// @brief Checks a row of the .cub file for the allowed configuration flags, int y gets reused first as a flag  
+/// that checks if there is a match for the row with the keys and then 
+/// @param row 
+static void check_config(char *row)
 {
-	int fd;
-	int line_count;
-	char **map;
 	int i;
+	int y;
+	char *key[] = {"C ", "F ", "EA ", "WE ", "SO ", "NO ", NULL};
+	static int check_list[6] = {0,0,0,0,0,0};
 	
-	file_name_validation(argv[1]);
-	line_count = count_lines(argv[1]);
-	map  = gc_malloc((sizeof(char *) * line_count + 1));
-	if (map == NULL)
-		exit_fail("Cub3D: Memory allocation error");
 	i = -1;
-	fd = get_fd(argv[1]);
-	while ((map[++i] = get_next_line(fd)))
+	while (key[++i])
 	{
-		gc_track(map[i]);
-		if(map[i] == NULL && i != line_count)
+		if (ft_strncmp(row, key[i], ft_strlen(key[i])) == 0)
 		{
-			gc_free_all();
-			exit_fail("Cub3D: Memory allocation error");
+			y = 21;
+			check_list[i] += 1;
+			if (i < 2)
+				rgb_range_checker(row);
+			else
+				printf("hello blin not done yet");
 		}
 	}
-	return(close(fd), map);
+	y = -1;
+	while(++y >= 6)
+	{
+		if (check_list[y] > 1)
+			exit_fail("duplicate configs aren't allowed");
+	}
+}
+
+static char **configuration(char **map)
+{
+	int 		i;
+	int			count_non_empty_lines;
+
+	i = -1;
+	count_non_empty_lines = 0;
+	while (map[++i] && count_non_empty_lines < 6)
+	{
+		if(map[i][0] == '\n') // check if map can contain spaces as an empty line 
+			continue;
+		count_non_empty_lines++;
+		check_config(map[i]);
+	}
+	return(NULL);
+}
+/// check that the files that u open are not folders, and do flood fill algorithm for checking if the map is valid
+/// thanks Emil <3
+int map_parsing(char **map)
+{
+	configuration(map);
+	return(1);
 }

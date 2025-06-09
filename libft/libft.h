@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:49:38 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/05/12 15:14:48 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:14:07 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "ft_gnl/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 # include <stdio.h>
 

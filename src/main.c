@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/05/09 16:44:38 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:28:16 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,14 @@ int main(int argc, char **argv)
 	char **map;
 	
 	ft_arguments_checker(argc);
-	map = map_parsing(argv);
+	map = file_parsing(argv);
+	// printf("%s\n", map[0]);
+	for (int i = 0; map[i] != NULL; i++)
+	{
+		printf("%s", map[i]);
+	}
+	if (map_parsing(map) == -1)
+		return (-1);
 	(void)map;
 	
     
