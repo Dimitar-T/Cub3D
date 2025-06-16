@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/16 13:59:44 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:26:19 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ int main(int argc, char **argv)
 	minimap(game);
     mlx_key_hook(game->mlx, key_callback, game);
 	mlx_loop(game->mlx);
-    free(game->ray);
-    // free(game->map->m);
-    free(game->map);
-    free(game->player);
-    free(game);
+    gc_free_all();
     return(0);
 }

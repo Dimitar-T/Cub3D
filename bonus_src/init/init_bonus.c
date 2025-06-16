@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 18:26:39 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:25:53 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ t_player   *init_player(t_map *map)
 {
     t_player    *player;
 
-    player = malloc(sizeof(t_player));
+    player = gc_malloc(sizeof(t_player));
     if (!player)
-    return(NULL);
+    exit_fail("init: allocation fail\n");
     init_pos(map->m, player);
     player->pdx = cos(player->pa);
     player->pdy = sin(player->pa);
@@ -77,10 +77,10 @@ t_map   *init_map(char **m)
 {
     t_map *map;
     
-    map = malloc(sizeof(t_map));
+    map = gc_malloc(sizeof(t_map));
     int y = 0;
     if (!map)
-    return(NULL);   
+    exit_fail("init: allocation fail\n");;   
     map->m = m;
     map->mx = ft_strlen(map->m[0]);
     while (map->m[y] != NULL)
@@ -93,9 +93,9 @@ t_ray   *init_rays(t_player *player)
 {
     t_ray *ray;
 
-    ray = malloc(sizeof(t_ray));
+    ray = gc_malloc(sizeof(t_ray));
     if (!ray)
-    return(NULL);
+    exit_fail("init: allocation fail\n");
     ray->rx = 0;
     ray->ry = 0;
     ray->ra = player->pa;
@@ -183,6 +183,9 @@ void init_textures(t_data *game)
     game->te = mlx_load_png("textures/33.png");
     game->tw = mlx_load_png("textures/44.png");
     game->d = mlx_load_png("textures/door.png");
+    if (game->tn == NULL || game->ts == NULL || game->tw == NULL
+        || game->d == NULL || game->te == NULL)
+    exit_fail("init: mlx failed to load png");
 }
 
 t_data *init_game(t_data *game)
@@ -193,10 +196,14 @@ t_data *init_game(t_data *game)
     game->win_width = game->map->mx * 64;
     game->win_height = game->map->my * 64;
     game->mlx = mlx_init(game->win_width, game->win_height, "Carto", true);
+    if (game->mlx == NULL)
+    exit_fail("init: allocation fail\n");
     game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
-    game->door = 0;
+    if (game->img == NULL)
+    exit_fail("init: allocation fail\n");
     // init_sprite(game->map->m, game);
     init_textures(game);
-    mlx_image_to_window(game->mlx, game->img, 0, 0);
+    if (mlx_image_to_window(game->mlx, game->img, 0, 0) == -1)
+    exit_fail("init: mlx failure image to window\n");
     return(game);
 }

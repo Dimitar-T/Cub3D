@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_rays.c                                        :+:      :+:    :+:   */
+/*   cast_rays_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 18:35:29 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:30:13 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 	if ((int)end >= game->win_height)
 		end = game->win_height - 1;
 	draw_scene((int)start, (int)end, game, x);
+	game->door = 0;
 }
 
 int door_distance(int map_x, int map_y, t_player *player)
