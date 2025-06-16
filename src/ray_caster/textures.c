@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/08 16:18:49 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:16:55 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,7 @@ int	get_ty(int y, int wall_top, int wall_height, mlx_texture_t *tex)
 
 mlx_texture_t	*choose_tex(t_data *game)
 {
-	if (game->part == 1)
-		return (game->s);
-	else if (game->part == 2)
-		return (game->f);
-	else if (game->ray->vert == 1)
+	if (game->ray->vert == 1)
 	{
 		if (game->ray->rdx > 0)
 			return (game->tw);

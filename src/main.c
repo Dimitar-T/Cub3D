@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/14 15:32:17 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:59:44 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void strip_trailing_newlines(char **map)
 int main(int argc, char **argv)
 {
 	char **map;
+	t_data *game;
 	
 	ft_arguments_checker(argc);
 	map = file_parsing(argv);
@@ -45,18 +46,19 @@ int main(int argc, char **argv)
 	// {
 	// 	printf("%s", map[i]);
 	// }
-	if (map_parsing(map) == -1)
+	game = map_parsing(map);
+	if (game == NULL)
 		return (-1);
 	// (void)map;
-	// t_data  *game = init_game(map);
-	// cast_rays(game, game->player, game->ray, game->map);
-	// minimap(game);
-    // mlx_key_hook(game->mlx, key_callback, game);
-	// mlx_loop(game->mlx);
-    // free(game->ray);
-    // // free(game->map->m);
-    // free(game->map);
-    // free(game->player);
-    // free(game);
-    // return(0);
+	init_game(game);
+	cast_rays(game, game->player, game->ray, game->map);
+	minimap(game);
+    mlx_key_hook(game->mlx, key_callback, game);
+	mlx_loop(game->mlx);
+    free(game->ray);
+    // free(game->map->m);
+    free(game->map);
+    free(game->player);
+    free(game);
+    return(0);
 }

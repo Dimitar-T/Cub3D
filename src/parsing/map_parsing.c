@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/16 12:27:16 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:48:48 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ static void check_for_valid_chars(char **map)
 		exit_fail("Cub3D: Error the map needs to conatin exactlly one player position\n");
 }
 
-int map_parsing(char **map)
+t_data *map_parsing(char **map)
 {
 	t_data	*data;
 	int		player_x;
@@ -133,15 +133,15 @@ int map_parsing(char **map)
 	char	**map_copy;
 	
 	data = ft_calloc(1, sizeof(t_data));
-	data->map = configuration(map, &data);
-	check_for_valid_chars(data->map);
-	find_player_position(data->map, &player_y, &player_x);
-	map_copy = copy_map(data->map);
+	data->m = configuration(map, &data);
+	check_for_valid_chars(data->m);
+	find_player_position(data->m, &player_y, &player_x);
+	map_copy = copy_map(data->m);
 	flood_fill(map_copy, player_y, player_x);
 	
-	for (int i = 0; data->map[i]; i++)
+	for (int i = 0; data->m[i]; i++)
 	{
-		printf("%s\n", data->map[i]);
+		printf("%s\n", data->m[i]);
 	}
-	return (1);
+	return (data);
 }

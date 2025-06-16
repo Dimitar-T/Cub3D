@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:25:20 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/08 16:35:49 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:18:21 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_ray_dir	mm_ray_direction(t_ray *ray, int dir)
 	}
 }
 
-void	mm_draw_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
+void	mm_draw_rays(t_ray *ray, t_map *map)
 {
 	int	map_x;
 	int	map_y;
@@ -132,7 +132,7 @@ void	mm_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		ray->mm_ry = player->py;
 		ray->rdx = cos(ray->ra);
 		ray->rdy = sin(ray->ra);
-		mm_draw_rays(game, player, ray, map);
+		mm_draw_rays(ray, map);
 		mm_draw_line(game, player, ray);
 		x += step;
 	}
@@ -142,7 +142,6 @@ void mm_floor_wall(mlx_image_t *img, char **map)
 {
 	int y;
     int x;
-	int i;
 	uint32_t wall_color;
 	uint32_t floor_color;
 
@@ -166,7 +165,7 @@ void mm_floor_wall(mlx_image_t *img, char **map)
 
 void minimap(t_data *game)
 {
-    mm_floor_wall(game->img, game->map->m);
+	mm_floor_wall(game->img, game->map->m);
     mm_draw_player(game);
     mm_rays(game, game->player, game->ray, game->map);
 }

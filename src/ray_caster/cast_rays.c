@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/12 20:46:19 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:17:02 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,17 @@ void	draw_scene(int start, int end, t_data *game, int x)
 	y = 0;
 	while (y < start)
 	{
-		game->part = 1;
-		mlx_put_pixel(game->img, x, y, draw_walls(game, start, wallheight, y));
+		mlx_put_pixel(game->img, x, y, game->sky_color);
 		y++;
 	}
 	while (y <= end)
 	{
-		game->part = 0;
 		mlx_put_pixel(game->img, x, y, draw_walls(game, start, wallheight, y));
 		y++;
 	}
 	while (y < game->win_height)
 	{
-		game->part = 2;
-		mlx_put_pixel(game->img, x, y, 0x404040FF);
+		mlx_put_pixel(game->img, x, y, game->floor);
 		y++;
 	}
 }
@@ -69,7 +66,6 @@ void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 	double	height;
 	double	start;
 	double	end;
-
 	dist = sqrt(pow(ray->rx - player->px, 2) + pow(ray->ry - player->py, 2));
 	dist *= cos(ray->ra - player->pa);
 	height = (64.0 / dist) * (game->win_width / 2.0);
@@ -82,7 +78,7 @@ void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 	draw_scene((int)start, (int)end, game, x);
 }
 
-void	draw_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
+void	draw_rays(t_ray *ray, t_map *map)
 {
 	int		map_x;
 	int		map_y;
@@ -90,7 +86,6 @@ void	draw_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 	double	prev_ry;
 	int		prev_map_x;
 	int		prev_map_y;
-
 	while (1)
 	{
 		prev_rx = ray->rx;
@@ -130,7 +125,7 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		ray->ry = player->py;
 		ray->rdx = cos(ray->ra);
 		ray->rdy = sin(ray->ra);
-		draw_rays(game, player, ray, map);
+		draw_rays(ray, map);
 		calc_walls(x, game, ray, player);
 		x++;
 	}

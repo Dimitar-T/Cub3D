@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/09 17:04:55 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:17:06 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,29 +202,23 @@ t_ray   *init_rays(t_player *player)
 
 void init_textures(t_data *game)
 {
-    game->tn = mlx_load_png("../../textures/11.png");
-    game->ts = mlx_load_png("../../textures/22.png");
-    game->te = mlx_load_png("../../textures/33.png");
-    game->tw = mlx_load_png("../../textures/44.png");
-    game->f = mlx_load_png("../../textures/1.png");
-    game->s = mlx_load_png("../../textures/sky.png");
+    game->tn = mlx_load_png("textures/11.png");
+    game->ts = mlx_load_png("textures/22.png");
+    game->te = mlx_load_png("textures/33.png");
+    game->tw = mlx_load_png("textures/44.png");
+    game->f = mlx_load_png("textures/1.png");
+    game->s = mlx_load_png("textures/sky.png");
 }
 
-t_data *init_game(char **m)
+t_data *init_game(t_data *game)
 {
-    t_data *game;
-    
-    game = malloc(sizeof(t_data));
-    if (!game)
-    return(NULL);
-    game->map = init_map(m);
+    game->map = init_map(game->m);
     game->player = init_player(game->map);
     game->ray = init_rays(game->player);
     game->win_width = game->map->mx * 64;
     game->win_height = game->map->my * 64;
     game->mlx = mlx_init(game->win_width, game->win_height, "Carto", true);
     game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
-    game->part = 0;
     // init_sprite(game->map->m, game);
     init_textures(game);
     mlx_image_to_window(game->mlx, game->img, 0, 0);
