@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   map_parsing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/16 15:05:51 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:06:25 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static void check_for_valid_chars(char **map)
 		y = -1;
 		while (map[i][++y])
 		{
-			if (!ft_strchr("01NSEW ", map[i][y]))
+			if (!ft_strchr("01NSEWD ", map[i][y]))
 				exit_fail("Cub3D: Error invalid character found in map\n");
 			if (ft_strchr("NSEW", map[i][y]))
 				player++;
