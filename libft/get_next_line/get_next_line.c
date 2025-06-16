@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:33:18 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/05 17:12:37 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/14 16:08:53 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*read_and_find(int fd, char *buffer, char **remainder, char *new_line)
 	int		bytes_read;
 	char	*temp;
 
-	while (ft_strchr(new_line, '\n') == NULL)
+	while (f_strchr(new_line, '\n') == NULL)
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (buffer == NULL)
@@ -42,7 +42,7 @@ char	*read_and_find(int fd, char *buffer, char **remainder, char *new_line)
 		if (bytes_read <= 0)
 			return (free(buffer), remainder = NULL, new_line);
 		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(new_line, buffer);
+		temp = f_strjoin(new_line, buffer);
 		free(buffer);
 		free(new_line);
 		if (temp == NULL)
@@ -92,7 +92,7 @@ char	*empty_remainder_and_first_read(int fd, char *buffer, char **remainder)
 	temp = NULL;
 	if (*remainder != NULL)
 	{
-		temp = ft_strdup(*remainder);
+		temp = f_strdup(*remainder);
 		if (temp == NULL)
 			return (free(*remainder), *remainder = NULL, NULL);
 		free(*remainder);
@@ -107,13 +107,13 @@ char	*empty_remainder_and_first_read(int fd, char *buffer, char **remainder)
 		if (bytes_read <= 0)
 			return (free(buffer), NULL);
 		buffer[bytes_read] = '\0';
-		temp = ft_strdup(buffer);
+		temp = f_strdup(buffer);
 		return (free(buffer), temp);
 	}
 	return (temp);
 }
 
-char	*ft_strchr(const char *string, int symbol)
+char	*f_strchr(const char *string, int symbol)
 {
 	int	i;
 

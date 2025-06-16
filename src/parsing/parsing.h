@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/09 17:01:48 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:24:38 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdbool.h>
+# include "../cub3d.h"
+# include "../init/init.h"
 #include "../../libft/libft.h"
 
 // typedef struct s_player
@@ -62,12 +65,14 @@
 //     int             win_height;
     
 // }               t_data;
-
-
+char	**copy_map(char **original);
+void	find_player_position(char **map, int *out_y, int *out_x);
+void    validate_texture_path(char *path);
+int 	get_fd(char *str);
 int 	map_parsing(char **argv);
 void	exit_fail(char *message);
 int 	map_parsing(char **map);
-void 	rgb_range_checker(char *row);
+void 	rgb_range_checker(char *row, int f_or_c, t_data **data);
 char	**file_parsing(char **argv);
 
 #endif

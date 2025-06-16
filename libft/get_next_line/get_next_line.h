@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:41:06 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/05 17:12:41 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/14 16:09:00 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ char	*get_next_line(int fd);
 char	*read_and_find(int fd, char *buffer, char **remainder, char *new_line);
 char	*divide(char *new_line, char **remainder);
 char	*empty_remainder_and_first_read(int fd, char *buffer, char **remainder);
-char	*ft_strchr(const char *string, int symbol);
+char	*f_strchr(const char *string, int symbol);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	f_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*f_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-char	*ft_strdup(const char *s1);
+char	*f_strdup(const char *s1);
 
 #endif

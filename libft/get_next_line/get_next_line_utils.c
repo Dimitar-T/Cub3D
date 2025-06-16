@@ -6,13 +6,13 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:35:53 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/05 17:12:30 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:31:11 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*f_strjoin(char const *s1, char const *s2)
 {
 	size_t	total_len;
 	char	*output;
@@ -76,7 +76,7 @@ size_t	f_strlen(const char *s)
 	return (count);
 }
 
-char	*ft_strdup(const char *s1)
+char	*f_strdup(const char *s1)
 {
 	char	*ptr;
 	int		i;

@@ -64,7 +64,7 @@ typedef struct s_data
     mlx_t           *mlx;
     t_player        *player;
     t_ray           *ray;
-    t_map           *map;
+    char            **map;
     mlx_image_t     *img;
     mlx_texture_t   *tn;
     mlx_texture_t   *ts;
@@ -77,6 +77,7 @@ typedef struct s_data
     int             part;
     int             win_width;
     int             win_height;
+    int             check_list[6];
     // t_sprite        *sprites[50];
 }               t_data;
 

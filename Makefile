@@ -14,7 +14,8 @@ OBJ_DIR = obj
 SRC	= 	$(SRC_DIR)/main.c $(SRC_DIR)/parsing/file_parsing.c $(SRC_DIR)/parsing/utility.c \
 		$(SRC_DIR)/garbage_collector/garbage_collector.c $(SRC_DIR)/parsing/map_parsing.c \
 		$(SRC_DIR)/parsing/map_parsing_util.c $(SRC_DIR)/init/init.c $(SRC_DIR)/moves/move_player.c \
-		$(SRC_DIR)/ray_caster/cast_rays.c $(SRC_DIR)/ray_caster/minimap.c $(SRC_DIR)/ray_caster/textures.c
+		$(SRC_DIR)/ray_caster/cast_rays.c $(SRC_DIR)/ray_caster/minimap.c $(SRC_DIR)/ray_caster/textures.c \
+		$(SRC_DIR)/parsing/flood_fill.c
 
 OBJ	= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 

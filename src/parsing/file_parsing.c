@@ -6,13 +6,13 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:56:45 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/09 14:28:31 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:05:01 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	get_fd(char *str)
+int	get_fd(char *str)
 {
 	int fd;
 	int	read_bytes;
@@ -64,21 +64,6 @@ static int count_lines(char *str)
 	close(fd);
 	return (count);
 }
-
-// static void	ft_free(char **string)
-// {
-// 	int	i;
-
-// 	if (string == NULL)
-// 		return ;
-// 	i = 0;
-// 	while (string[i] != NULL)
-// 	{
-// 		free(string[i]);
-// 		i++;
-// 	}
-// 	free(string);
-// }
 
 char	**file_parsing(char **argv)
 {
