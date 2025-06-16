@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 14:17:06 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:33:05 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,26 @@ void init_pos(char **map, t_player *player)
 			if (map[y][x] == 'N')
             {
 				player->pa = 3 * M_PI / 2;
-                player->px = x * 64;
-                player->py = y * 64;
+                player->px = x * 64 + 32;
+                player->py = y * 64 + 32;
             }
             else if (map[y][x] == 'S')
             {
                 player->pa = M_PI / 2;
-                player->px = x * 64;
-                player->py = y * 64;
+                player->px = x * 64 + 32;
+                player->py = y * 64 + 32;
             }
             else if (map[y][x] == 'E')
             {
                 player->pa = 0;
-                player->px = x * 64;
-                player->py = y * 64;
+                player->px = x * 64 + 32;
+                player->py = y * 64 + 32;
             }
             else if (map[y][x] == 'W')
             {
                 player->pa = M_PI;
-                player->px = x * 64;
-                player->py = y * 64;
+                player->px = x * 64 + 32;
+                player->py = y * 64 + 32;
             }
 			x++;
 		}
@@ -206,8 +206,6 @@ void init_textures(t_data *game)
     game->ts = mlx_load_png("textures/22.png");
     game->te = mlx_load_png("textures/33.png");
     game->tw = mlx_load_png("textures/44.png");
-    game->f = mlx_load_png("textures/1.png");
-    game->s = mlx_load_png("textures/sky.png");
 }
 
 t_data *init_game(t_data *game)

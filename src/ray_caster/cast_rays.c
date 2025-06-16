@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 14:17:02 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:53:16 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	draw_scene(int start, int end, t_data *game, int x)
 
 	wallheight = end - start;
 	y = 0;
+	// printf("s %d f %d\n", game->sky_color, game->floor);
 	while (y < start)
 	{
 		mlx_put_pixel(game->img, x, y, game->sky_color);

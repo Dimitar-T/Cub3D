@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/12 19:47:30 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:01:23 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 {
 	char	**split;
 	int		i;
-	int		value;
+	int		value; 
 	int 	j;
 	
 	while (*row == 'F' || *row == 'C' || *row == ' ')
@@ -35,9 +35,10 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 		if (value < 0 || value > 255)
 			exit_fail("Cub3D: RGB values must be between 0 and 255\n");
 		if (f_or_c == 0)
-			(*data)->floor += value;
+			(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split[i]))) + value;
 		if (f_or_c == 1)
-			(*data)->sky_color += value;
+			(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split[i]))) + value;
+		printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
 	}
 }
 

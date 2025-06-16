@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/16 13:48:48 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:05:51 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,12 @@ t_data *map_parsing(char **map)
 	
 	for (int i = 0; data->m[i]; i++)
 	{
-		printf("%s\n", data->m[i]);
+		for (int y = 0; data->m[i][y]; y++)
+		{
+			printf("%d\n", data->m[i][y]);
+		}
+		
+		
 	}
 	return (data);
 }

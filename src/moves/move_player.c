@@ -1,52 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
+/*   Updated: 2025/06/16 17:18:54 by jwardeng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "moves.h"
-// draw in 2D to debug
-// void	draw_player(t_data *game)
-// {
-// 	uint32_t	color;
 
-// 	color = 0xFF0000FF;
-// 	if (game->player->px >= 0 && (int)game->player->px < game->win_width
-// 		&& game->player->py >= 0 && (int)game->player->py < game->win_height)
-// 	{
-// 		mlx_put_pixel(game->img, (int)game->player->px, (int)game->player->py,
-// 			color);
-// 		mlx_put_pixel(game->img, ((int)game->player->px) + 1,
-// 			(int)game->player->py, color);
-// 		mlx_put_pixel(game->img, ((int)game->player->px) - 1,
-// 			(int)game->player->py, color);
-// 		mlx_put_pixel(game->img, (int)game->player->px, (int)game->player->py
-// 			+ 1, color);
-// 		mlx_put_pixel(game->img, (int)game->player->px, (int)game->player->py
-// 			- 1, color);
-// 	}
-// 	draw_rays(game, game->player, game->ray, game->map);
-// }
-
-// int wall_check()
-// {
-
-// }
+void	set_offset(t_player *player, double angle_x, double angle_y)
+{
+	if (angle_x < 0)
+		player->xo = -20;
+	else
+		player->xo = 20;
+	if (angle_y < 0)
+		player->yo = -20;
+	else
+		player->yo = 20;
+}
 
 void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
 {
+	double	pdx;
+	double	pdy;
+
 	if (data.key == MLX_KEY_A)
 	{
-		if (map->m[(int)(player->py + sin(player->pa - M_PI / 2)
-				* player->speed) / 64][(int)(player->px + cos(player->pa - M_PI
-					/ 2) * player->speed) / 64] != '1')
-		{
-			player->px += cos(player->pa - M_PI / 2) * player->speed;
-			player->py += sin(player->pa - M_PI / 2) * player->speed;
-		}
+		pdx = cos(player->pa - M_PI / 2);
+		pdy = sin(player->pa - M_PI / 2);
 	}
 	else if (data.key == MLX_KEY_D)
 	{
-		if (map->m[(int)(player->py + sin(player->pa + M_PI / 2)
-				* player->speed) / 64][(int)(player->px + cos(player->pa + M_PI
-					/ 2) * player->speed) / 64] != '1')
+		pdx = cos(player->pa + M_PI / 2);
+		pdy = sin(player->pa + M_PI / 2);
+	}
+	if (data.key == MLX_KEY_A || data.key == MLX_KEY_D)
+	{
+		set_offset(player, pdx, pdy);
+		if (map->m[(int)(player->py + player->yo + pdy * player->speed) / 64]
+			[(int)(player->px + player->xo + pdx * player->speed) / 64] != '1')
 		{
-			player->px += cos(player->pa + M_PI / 2) * player->speed;
-			player->py += sin(player->pa + M_PI / 2) * player->speed;
+			player->px += pdx * player->speed;
+			player->py += pdy * player->speed;
 		}
 	}
 }
@@ -55,8 +55,10 @@ void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
 {
 	if (data.key == MLX_KEY_W)
 	{
-		if (map->m[(int)(player->py + player->pdy * player->speed)
-			/ 64][(int)(player->px + player->pdx * player->speed) / 64] != '1')
+		set_offset(player, player->pdx, player->pdy);
+		if (map->m[(int)(player->py + player->yo + player->pdy * player->speed)
+			/ 64][(int)(player->px + player->xo + player->pdx * player->speed)
+			/ 64] != '1')
 		{
 			player->px += player->pdx * player->speed;
 			player->py += player->pdy * player->speed;
@@ -64,8 +66,10 @@ void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
 	}
 	else if (data.key == MLX_KEY_S)
 	{
-		if (map->m[(int)(player->py - player->pdy * player->speed)
-			/ 64][(int)(player->px - player->pdx * player->speed) / 64] != '1')
+		set_offset(player, player->pdx, player->pdy);
+		if (map->m[(int)(player->py - player->yo - player->pdy * player->speed)
+			/ 64][(int)(player->px - player->xo - player->pdx * player->speed)
+			/ 64] != '1')
 		{
 			player->px -= player->pdx * player->speed;
 			player->py -= player->pdy * player->speed;
@@ -79,13 +83,13 @@ void	change_direction(mlx_key_data_t data, t_player *player)
 {
 	if (data.key == MLX_KEY_RIGHT)
 	{
-		player->pa += player->speed / 10;
+		player->pa += player->speed / 25;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
 	else if (data.key == MLX_KEY_LEFT)
 	{
-		player->pa -= player->speed / 10;
+		player->pa -= player->speed / 25;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
