@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 18:54:53 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:26:39 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void init_textures(t_data *game)
     game->ts = mlx_load_png("textures/22.png");
     game->te = mlx_load_png("textures/33.png");
     game->tw = mlx_load_png("textures/44.png");
+    game->d = mlx_load_png("textures/door.png");
 }
 
 t_data *init_game(t_data *game)
@@ -193,6 +194,7 @@ t_data *init_game(t_data *game)
     game->win_height = game->map->my * 64;
     game->mlx = mlx_init(game->win_width, game->win_height, "Carto", true);
     game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
+    game->door = 0;
     // init_sprite(game->map->m, game);
     init_textures(game);
     mlx_image_to_window(game->mlx, game->img, 0, 0);

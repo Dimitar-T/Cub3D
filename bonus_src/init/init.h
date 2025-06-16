@@ -71,6 +71,8 @@ typedef struct s_data
     mlx_texture_t   *ts;
     mlx_texture_t   *te;
     mlx_texture_t   *tw;
+    mlx_texture_t   *d;
+    int             door;
     int             sky_color;
     int             floor;
     int             win_width;

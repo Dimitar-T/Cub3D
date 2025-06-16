@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 18:20:51 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:56:19 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	get_ty(int y, int wall_top, int wall_height, mlx_texture_t *tex)
 
 mlx_texture_t	*choose_tex(t_data *game)
 {
+	if (game->door == 0)
+	{
 	if (game->ray->vert == 1)
 	{
 		if (game->ray->rdx > 0)
@@ -69,4 +71,7 @@ mlx_texture_t	*choose_tex(t_data *game)
 		else
 			return (game->ts);
 	}
+	}
+	else
+	return(game->d);
 }
