@@ -59,8 +59,9 @@ void	draw_scene(int start, int end, t_data *game, int x)
 	}
 }
 
-// calculates the height of the walls depending on distance to player and deals with
-// fisheye distortion due to difference in ray length
+// calculates the height of the walls depending on distance to player and tile_size
+// and deals with fisheye distortion due to difference in ray length
+// change hypot(ray->rx - player->px, ray->ry - player->py)
 void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 {
 	double	dist;
@@ -79,6 +80,8 @@ void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 	draw_scene((int)start, (int)end, game, x);
 }
 
+// we keep going further along direction x and y until we hit wall
+// adds check for vertical/horizontal hit depending on prev
 void	draw_rays(t_ray *ray, t_map *map)
 {
 	int		map_x;
@@ -110,6 +113,7 @@ void	draw_rays(t_ray *ray, t_map *map)
 	}
 }
 
+// FOV is set to 60° so we start casting rays at -30° (from pa) and keep increasing up to + 30°
 void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 {
 	int		x;
