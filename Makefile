@@ -17,8 +17,8 @@ BNS_OBJ_DIR = bonus_obj
 SRC	= 	$(SRC_DIR)/main.c $(SRC_DIR)/parsing/file_parsing.c $(SRC_DIR)/parsing/utility.c \
 		$(SRC_DIR)/garbage_collector/garbage_collector.c $(SRC_DIR)/parsing/map_parsing.c \
 		$(SRC_DIR)/parsing/map_parsing_util.c $(SRC_DIR)/init/init.c $(SRC_DIR)/moves/move_player.c \
-		$(SRC_DIR)/ray_caster/cast_rays.c $(SRC_DIR)/ray_caster/minimap.c $(SRC_DIR)/ray_caster/textures.c \
-		$(SRC_DIR)/parsing/flood_fill.c
+		$(SRC_DIR)/ray_caster/cast_rays.c $(SRC_DIR)/ray_caster/minimap.c $(SRC_DIR)/ray_caster/minimap_rays.c \
+		$(SRC_DIR)/ray_caster/textures.c  $(SRC_DIR)/parsing/flood_fill.c
 
 OBJ	= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
@@ -26,7 +26,7 @@ BNS_SRC	= 	$(BNS_SRC_DIR)/main.c $(BNS_SRC_DIR)/parsing/file_parsing_bonus.c $(B
 			$(BNS_SRC_DIR)/garbage_collector/garbage_collector.c $(BNS_SRC_DIR)/parsing/map_parsing_bonus.c \
 			$(BNS_SRC_DIR)/parsing/map_parsing_util_bonus.c $(BNS_SRC_DIR)/init/init_bonus.c $(BNS_SRC_DIR)/moves/move_player_bonus.c \
 			$(BNS_SRC_DIR)/ray_caster/cast_rays_bonus.c $(BNS_SRC_DIR)/ray_caster/minimap_bonus.c $(BNS_SRC_DIR)/ray_caster/textures_bonus.c \
-			$(BNS_SRC_DIR)/parsing/flood_fill_bonus.c
+			$(BNS_SRC_DIR)/parsing/flood_fill_bonus.c $(BNS_SRC_DIR)/ray_caster/minimap_rays_bonus.c $(BNS_SRC_DIR)/ray_caster/helper_bonus.c
 
 BNS_OBJ	= $(patsubst $(BNS_SRC_DIR)/%.c, $(BNS_OBJ_DIR)/%.o, $(BNS_SRC))
 

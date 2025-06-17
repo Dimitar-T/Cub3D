@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/17 17:50:51 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/17 18:14:26 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	exit_fail(char *message);
 t_data	*map_parsing(char **map);
 void 	rgb_range_checker(char *row, int f_or_c, t_data **data);
 char	**file_parsing(char **argv);
-
+void	flood_fill(char **map, int y, int x);
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   move_player_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 17:18:54 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:21:10 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ void	change_direction(mlx_key_data_t data, t_player *player)
 {
 	if (data.key == MLX_KEY_RIGHT)
 	{
-		player->pa += player->speed / 25;
+		player->pa += 0.2;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
 	else if (data.key == MLX_KEY_LEFT)
 	{
-		player->pa -= player->speed / 25;
+		player->pa -= 0.2;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
