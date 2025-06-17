@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/16 15:05:51 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:53:36 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void check_config(char *row, t_data **data)
 			if (i < 2)
 				rgb_range_checker(row, i, data);
 			else
-				validate_texture_path(row + ft_strlen(key[i]));
+				validate_texture_path(row + ft_strlen(key[i]), key[i], data);
 			break;
 		}
 	}

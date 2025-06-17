@@ -1,10 +1,10 @@
-F 77,76,76
-C 99,99,99
+F 255,245,249
+C 223,239,251
 
-NO textures/11.png
-SO textures/22.png
-WE textures/33.png
-EA textures/44.png
+NO textures/0.png
+SO textures/1.png
+WE textures/2.png
+EA textures/3.png
 
 1111111111111111111
 10W1001001001000001

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/16 13:46:33 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:50:51 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 // }               t_data;
 char	**copy_map(char **original);
 void	find_player_position(char **map, int *out_y, int *out_x);
-void    validate_texture_path(char *path);
+void    validate_texture_path(char *path, char *key, t_data **data);
 int 	get_fd(char *str);
 // int 	map_parsing(char **argv);
 void	exit_fail(char *message);
