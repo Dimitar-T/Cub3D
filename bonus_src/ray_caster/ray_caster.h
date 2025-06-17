@@ -3,86 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:21 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 12:13:48 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:17:18 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_CASTER_H
-#define RAY_CASTER_H
+# define RAY_CASTER_H
 
-#include <math.h>
-#include "../../MLX42/include/MLX42/MLX42.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "../../libft/libft.h"
-#include "../cub3d.h"
-// # include "../../MLX42/include/MLX42/MLX42_Int.h"
+# include "../cub3d.h"
+
+# define FOV 1.0471975512
+# define MINIMAP_SCALE 0.15625
+// ≈ M_PI / 3
+// = 10.0 / 64.0
 
 typedef enum s_ray_dir
 {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-} t_ray_dir;
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}				t_ray_dir;
 
-typedef enum s_tex_type
-{
-    NORTH,
-    SOUTH,
-    WEST,
-    EAST
-} t_tex_type;
-// typedef struct s_player
-// {
-//     double             px;
-//     double             py;
-//     double             pdx;
-//     double             pdy;
-//     double             pa;
-//     double             speed;
-// }               t_player;
-
-// typedef struct s_ray
-// {
-//     double             rx;
-//     double             ry;
-//     double             ra;
-//     double             rdx;
-//     double             rdy;
-
-// }               t_ray;
-
-// typedef struct s_map
-// {
-//     char               **m;
-//     double             mx;
-//     double             my;
-// }               t_map;
-
-// typedef struct s_data
-// {
-//     mlx_t            *mlx;
-//     t_player        *player;
-//     t_ray           *ray;
-//     t_map           *map;
-//     mlx_image_t     *img;
-//     int             win_width;
-//     int             win_height;
-
-// }               t_data;
-
-// t_data *init_game(char *m);
-void			flood_fill(char **map, int y, int x);
-void			cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map);
+//raycaster
+void			cast_rays(t_data *game, t_player *player, t_ray *ray,
+					t_map *map);
+//minimap
 void			minimap(t_data *game);
+void			mm_cast_rays(t_data *game, t_player *player, t_ray *ray,
+					t_map *map);
+//textures
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
 double			get_tx(t_ray *rays, mlx_texture_t *img);
-int				get_ty(int y_screen, int wall_top, int wall_height, mlx_texture_t *tex);
+int				get_ty(int y_screen, int wall_top, int wall_height,
+					mlx_texture_t *tex);
 mlx_texture_t	*choose_tex(t_data *game);
+//bonus_helper
+int				door_distance(int map_x, int map_y, t_player *player);
 #endif

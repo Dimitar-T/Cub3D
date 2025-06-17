@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 17:18:54 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:08:19 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	set_offset(t_player *player, double angle_x, double angle_y)
 		player->yo = 20;
 }
 
-// same as horizontal movement, but adjustes angle to 
-// + a quarter circle (90°) for right and - quarter circle for left 
+// same as horizontal movement, but adjustes angle to
+// + a quarter circle (90°) for right and - quarter circle for left
 void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
 {
 	double	pdx;
@@ -46,8 +46,9 @@ void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
 	if (data.key == MLX_KEY_A || data.key == MLX_KEY_D)
 	{
 		set_offset(player, pdx, pdy);
-		if (map->m[(int)(player->py + player->yo + pdy * player->speed) / 64]
-			[(int)(player->px + player->xo + pdx * player->speed) / 64] != '1')
+		if (map->m[(int)(player->py + player->yo + pdy * player->speed)
+			/ 64][(int)(player->px + player->xo + pdx * player->speed)
+			/ 64] != '1')
 		{
 			player->px += pdx * player->speed;
 			player->py += pdy * player->speed;
@@ -55,7 +56,7 @@ void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
 	}
 }
 
-// checks if the position p is moving towards is open space 
+// checks if the position p is moving towards is open space
 // (uses current position, adds 20 px for realistic wall-distance and moves
 // speed steps on the y direction + x direction)
 void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
@@ -86,19 +87,19 @@ void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
 		move_player2(data, player, map);
 }
 
-//changes player angle by 18° -> change it to fixed eg 0.1 around 6°
+// changes player angle around 12°
 // and changes pdx/pdy (x & y direction of the current angle) accordingly
 void	change_direction(mlx_key_data_t data, t_player *player)
 {
 	if (data.key == MLX_KEY_RIGHT)
 	{
-		player->pa += player->speed / 25;
+		player->pa += 0.2;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
 	else if (data.key == MLX_KEY_LEFT)
 	{
-		player->pa -= player->speed / 25;
+		player->pa -= 0.2;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}

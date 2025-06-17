@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/16 13:46:33 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:06:35 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	exit_fail(char *message);
 t_data	*map_parsing(char **map);
 void 	rgb_range_checker(char *row, int f_or_c, t_data **data);
 char	**file_parsing(char **argv);
-
+void	flood_fill(char **map, int y, int x);
 #endif

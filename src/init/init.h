@@ -1,15 +1,7 @@
 # ifndef INIT_H
 # define INIT_H
 
-#include <math.h>
-# include "../../MLX42/include/MLX42/MLX42.h"
-#include <stdio.h>
-#include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-#include "../../libft/libft.h"
 #include "../cub3d.h"
-// # include "../../MLX42/include/MLX42/MLX42_Int.h"
 
 typedef struct s_player
 {

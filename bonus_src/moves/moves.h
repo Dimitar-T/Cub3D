@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:31:01 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/16 17:19:28 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:12:31 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define MOVES_H
 
 # include "../cub3d.h"
-# include <math.h>
-# include <stdio.h>
-# include <string.h>
 
 void	key_callback(mlx_key_data_t data, void *param);
 

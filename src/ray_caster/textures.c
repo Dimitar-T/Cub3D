@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 18:20:51 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:08:43 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,19 @@
 
 int	get_texture_color(mlx_texture_t *tex, int x, int y)
 {
-	int32_t	*pixels;
-	int		color;
-	int		a;
-	int		b;
-	int		g;
-	int		r;
+	int			color;
+	uint32_t	*pixels;
+	int			agbr[4];
 
 	if (!tex || x < 0 || y < 0 || x >= (int)tex->width || y >= (int)tex->height)
 		return (0);
-	pixels = (int32_t *)tex->pixels;
+	pixels = (uint32_t *)tex->pixels;
 	color = pixels[y * tex->width + x];
-	a = (color >> 24) & 0xFF;
-	b = (color >> 16) & 0xFF;
-	g = (color >> 8) & 0xFF;
-	r = (color)&0xFF;
-	return (r << 24 | g << 16 | b << 8 | a);
+	agbr[0] = (color >> 24) & 0xFF;
+	agbr[1] = (color >> 16) & 0xFF;
+	agbr[2] = (color >> 8) & 0xFF;
+	agbr[3] = (color)&0xFF;
+	return (agbr[3] << 24 | agbr[2] << 16 | agbr[1] << 8 | agbr[0]);
 }
 
 double	get_tx(t_ray *ray, mlx_texture_t *tex)

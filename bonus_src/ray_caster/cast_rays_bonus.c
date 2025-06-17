@@ -6,18 +6,11 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 19:30:13 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:58:40 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
-
-#define MINIMAP_WIDTH 200
-#define MINIMAP_HEIGHT 150
-#define MINIMAP_TS 8
-#define MINIMAP_OFFSET_X 10
-#define MINIMAP_OFFSET_Y 10
-#define MINIMAP_SCALE 0.2
 
 int	draw_walls(t_data *game, int start, int wallheight, int y)
 {
@@ -41,7 +34,6 @@ void	draw_scene(int start, int end, t_data *game, int x)
 
 	wallheight = end - start;
 	y = 0;
-	// printf("s %d f %d\n", game->sky_color, game->floor);
 	while (y < start)
 	{
 		mlx_put_pixel(game->img, x, y, game->sky_color);
@@ -59,15 +51,16 @@ void	draw_scene(int start, int end, t_data *game, int x)
 	}
 }
 
-// calculates the height of the walls depending on distance to player and deals with
-// fisheye distortion due to difference in ray length
+//calculates the height of the walls depending on distance to player
+//and deals with fisheye distortion due to difference in ray length
 void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 {
 	double	dist;
 	double	height;
 	double	start;
 	double	end;
-	dist = sqrt(pow(ray->rx - player->px, 2) + pow(ray->ry - player->py, 2));
+
+	dist = hypot(ray->rx - player->px, ray->ry - player->py);
 	dist *= cos(ray->ra - player->pa);
 	height = (64.0 / dist) * (game->win_width / 2.0);
 	start = (game->win_height - height) / 2.0;
@@ -80,25 +73,12 @@ void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 	game->door = 0;
 }
 
-int door_distance(int map_x, int map_y, t_player *player)
-{
-    double distance;
-	
-	distance = hypot(player->px - (map_x * 64 + 32), player->py - (map_y * 64 + 32));
-    if (distance <= 100)
-        return(1);
-	else
-		return(0);
-}
-
 void	draw_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 {
 	int		map_x;
 	int		map_y;
 	double	prev_rx;
 	double	prev_ry;
-	int		prev_map_x;
-	int		prev_map_y;
 
 	while (1)
 	{
@@ -113,58 +93,20 @@ void	draw_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		if (map->m[map_y][map_x] == '1' || (map->m[map_y][map_x] == 'D'
 				&& door_distance(map_x, map_y, player) == 0))
 		{
-			prev_map_x = (int)(prev_rx / 64);
-			prev_map_y = (int)(prev_ry / 64);
-			if (prev_map_x != map_x)
-				ray->vert = 1;
-			else if (prev_map_y != map_y)
-				ray->vert = 0;
+			ray->vert = ((int)(prev_rx / 64) != map_x);
 			if (map->m[map_y][map_x] == 'D')
-			game->door = 1;
+				game->door = 1;
 			break ;
 		}
 	}
 }
 
-// void	draw_rays(t_ray *ray, t_map *map)
-// {
-// 	int		map_x;
-// 	int		map_y;
-// 	double	prev_rx;
-// 	double	prev_ry;
-// 	int		prev_map_x;
-// 	int		prev_map_y;
-// 	while (1)
-// 	{
-// 		prev_rx = ray->rx;
-// 		prev_ry = ray->ry;
-// 		ray->rx += ray->rdx * 0.1;
-// 		ray->ry += ray->rdy * 0.1;
-// 		map_x = (int)(ray->rx / 64);
-// 		map_y = (int)(ray->ry / 64);
-// 		if (map_x < 0 || map_y < 0 || map_x >= map->mx || map_y >= map->my)
-// 			break ;
-// 		if (map->m[map_y][map_x] == '1')
-// 		{
-// 			prev_map_x = (int)(prev_rx / 64);
-// 			prev_map_y = (int)(prev_ry / 64);
-// 			if (prev_map_x != map_x)
-// 				ray->vert = 1;
-// 			else if (prev_map_y != map_y)
-// 				ray->vert = 0;
-// 			break ;
-// 		}
-// 	}
-// }
-
 void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 {
 	int		x;
-	double	FOV;
 	double	start_angle;
 
 	x = 0;
-	FOV = M_PI / 3;
 	start_angle = player->pa - FOV / 2;
 	while (x < game->win_width)
 	{

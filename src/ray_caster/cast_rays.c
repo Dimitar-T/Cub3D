@@ -6,18 +6,11 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 18:53:59 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:43:31 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
-
-#define MINIMAP_WIDTH 200
-#define MINIMAP_HEIGHT 150
-#define MINIMAP_TS 8
-#define MINIMAP_OFFSET_X 10
-#define MINIMAP_OFFSET_Y 10
-#define MINIMAP_SCALE 0.2
 
 int	draw_walls(t_data *game, int start, int wallheight, int y)
 {
@@ -41,7 +34,6 @@ void	draw_scene(int start, int end, t_data *game, int x)
 
 	wallheight = end - start;
 	y = 0;
-	// printf("s %d f %d\n", game->sky_color, game->floor);
 	while (y < start)
 	{
 		mlx_put_pixel(game->img, x, y, game->sky_color);
@@ -59,16 +51,16 @@ void	draw_scene(int start, int end, t_data *game, int x)
 	}
 }
 
-// calculates the height of the walls depending on distance to player and tile_size
+// calculates height of walls depending on distance to player and tile_size
 // and deals with fisheye distortion due to difference in ray length
-// change hypot(ray->rx - player->px, ray->ry - player->py)
 void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player)
 {
 	double	dist;
 	double	height;
 	double	start;
 	double	end;
-	dist = sqrt(pow(ray->rx - player->px, 2) + pow(ray->ry - player->py, 2));
+
+	dist = hypot(ray->rx - player->px, ray->ry - player->py);
 	dist *= cos(ray->ra - player->pa);
 	height = (64.0 / dist) * (game->win_width / 2.0);
 	start = (game->win_height - height) / 2.0;
@@ -88,8 +80,7 @@ void	draw_rays(t_ray *ray, t_map *map)
 	int		map_y;
 	double	prev_rx;
 	double	prev_ry;
-	int		prev_map_x;
-	int		prev_map_y;
+
 	while (1)
 	{
 		prev_rx = ray->rx;
@@ -102,26 +93,23 @@ void	draw_rays(t_ray *ray, t_map *map)
 			break ;
 		if (map->m[map_y][map_x] == '1')
 		{
-			prev_map_x = (int)(prev_rx / 64);
-			prev_map_y = (int)(prev_ry / 64);
-			if (prev_map_x != map_x)
+			if ((int)(prev_rx / 64) != map_x)
 				ray->vert = 1;
-			else if (prev_map_y != map_y)
+			else if ((int)(prev_ry / 64) != map_y)
 				ray->vert = 0;
 			break ;
 		}
 	}
 }
 
-// FOV is set to 60° so we start casting rays at -30° (from pa) and keep increasing up to + 30°
+// FOV is set to 60° so we start casting rays at
+// -30° (from pa) and keep increasing up to + 30°
 void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 {
 	int		x;
-	double	FOV;
 	double	start_angle;
 
 	x = 0;
-	FOV = M_PI / 3;
 	start_angle = player->pa - FOV / 2;
 	while (x < game->win_width)
 	{
@@ -136,3 +124,17 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 	}
 	minimap(game);
 }
+
+//maybe add here and change in mm to andle edge case
+// int handle_exact_hit(t_ray *ray)
+// {
+// if (ray->rdy < 0) // Ray facing up
+// 	return(int)((ray->ry - 1) / 64);
+// else
+// 	return(int)(ray->ry / 64);
+
+// if (ray->rdx < 0) // Ray facing left
+// 	map_x = (int)((ray->rx - 1) / 64);
+// else
+// 	map_x = (int)(ray->rx / 64);
+// }
