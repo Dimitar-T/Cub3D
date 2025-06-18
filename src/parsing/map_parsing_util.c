@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/17 18:12:02 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:23:59 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void validate_texture_path(char *path, char *key, t_data **data)
 	printf("debug %s\n", path);
 	get_fd(path);
 	if(key[0] == 'E') //EWSN
-    	(* data)->te = mlx_load_png(path);
+    	(*data)->te = mlx_load_png(path);
 	else if(key[0] == 'W')
-		(* data)->tw = mlx_load_png(path);
+		(*data)->tw = mlx_load_png(path);
 	else if(key[0] == 'S')
-		(* data)->ts = mlx_load_png(path);
+		(*data)->ts = mlx_load_png(path);
 	else if(key[0] == 'N')
-    	(* data)->te = mlx_load_png(path);
+    	(*data)->tn = mlx_load_png(path);
     // if ((* data)->tn == NULL || (* data)->ts == NULL || (* data)->tw == NULL || (* data)->te == NULL)
     // exit_fail("init: mlx failed to load png");
 }
