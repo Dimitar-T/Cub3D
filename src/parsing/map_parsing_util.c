@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/17 18:12:02 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:37:05 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 			(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split[i]))) + value;
 		if (f_or_c == 1)
 			(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split[i]))) + value;
-		printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
+		// printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
 	}
 }
 
@@ -69,7 +69,7 @@ void validate_texture_path(char *path, char *key, t_data **data)
 		path++;
 	if (!path || ft_strlen(path) == 0)
 		exit_fail("Cub3D: Empty texture path\n");
-	printf("debug %s\n", path);
+	// printf("debug %s\n", path);
 	get_fd(path);
 	if(key[0] == 'E') //EWSN
     	(* data)->te = mlx_load_png(path);
@@ -78,7 +78,7 @@ void validate_texture_path(char *path, char *key, t_data **data)
 	else if(key[0] == 'S')
 		(* data)->ts = mlx_load_png(path);
 	else if(key[0] == 'N')
-    	(* data)->te = mlx_load_png(path);
+    	(* data)->tn = mlx_load_png(path);
     // if ((* data)->tn == NULL || (* data)->ts == NULL || (* data)->tw == NULL || (* data)->te == NULL)
     // exit_fail("init: mlx failed to load png");
 }

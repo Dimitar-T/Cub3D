@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:31:01 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/17 17:18:39 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:50:35 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 # include "../cub3d.h"
 
 void	key_callback(mlx_key_data_t data, void *param);
-
+void	update_keys(void *param);
 #endif

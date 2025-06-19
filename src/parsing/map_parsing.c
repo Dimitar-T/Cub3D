@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/17 17:53:36 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:14:15 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,20 +133,22 @@ t_data *map_parsing(char **map)
 	char	**map_copy;
 	
 	data = ft_calloc(1, sizeof(t_data));
+	if (data == NULL)
+		exit_fail("Cub3D: Error memory allocation failed!\n");
+	gc_track(data);
+	///data->mouse_posx
 	data->m = configuration(map, &data);
 	check_for_valid_chars(data->m);
 	find_player_position(data->m, &player_y, &player_x);
 	map_copy = copy_map(data->m);
 	flood_fill(map_copy, player_y, player_x);
 	
-	for (int i = 0; data->m[i]; i++)
-	{
-		for (int y = 0; data->m[i][y]; y++)
-		{
-			printf("%d\n", data->m[i][y]);
-		}
-		
-		
-	}
+	// for (int i = 0; data->m[i]; i++)
+	// {
+	// 	for (int y = 0; data->m[i][y]; y++)
+	// 	{
+	// 		printf("%d\n", data->m[i][y]);
+	// 	}
+	// }
 	return (data);
 }

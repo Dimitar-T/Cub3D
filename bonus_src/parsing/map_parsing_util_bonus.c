@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_util.c                                 :+:      :+:    :+:   */
+/*   map_parsing_util_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/16 15:01:23 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:36:32 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 			(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split[i]))) + value;
 		if (f_or_c == 1)
 			(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split[i]))) + value;
-		printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
+		// printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
 	}
 }
 
