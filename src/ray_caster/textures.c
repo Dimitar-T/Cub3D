@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 12:49:01 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:45:17 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ mlx_texture_t	*choose_tex(t_data *game)
 		else
 			return (game->ts);
 	}
+}
+
+int	get_tex_px(t_data *game, int start, int wallheight, int y)
+{
+	int				tex_x;
+	int				tex_y;
+	int				color;
+	mlx_texture_t	*tex;
+
+	tex = choose_tex(game);
+	tex_x = get_tx(game, game->ray, tex);
+	tex_y = get_ty(y, start, wallheight, tex);
+	color = get_texture_color(tex, tex_x, tex_y);
+	return (color);
 }

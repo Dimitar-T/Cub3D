@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 14:54:03 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:31:23 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	change_direction(mlx_key_data_t data, t_player *player)
 {
 	if (data.key == MLX_KEY_RIGHT)
 	{
-		player->pa += 0.02;
+		player->pa += 0.1;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
 	else if (data.key == MLX_KEY_LEFT)
 	{
-		player->pa -= 0.02;
+		player->pa -= 0.1;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}

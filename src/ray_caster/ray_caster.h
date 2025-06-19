@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:21 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/18 15:26:28 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:31:26 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,12 @@
 # define FOV 1.0471975512
 // ≈ M_PI / 3
 
-typedef enum s_ray_dir
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-}				t_ray_dir;
-
-typedef enum s_tex_type
-{
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST
-}				t_tex_type;
-
-//ray_caster
-void			cast_rays(t_data *game, t_player *player, t_ray *ray,
-					t_map *map);
-//minimap
-void			minimap(t_data *game);
-void			mm_cast_rays(t_data *game, t_player *player, t_ray *ray,
-					t_map *map);
-//textures
-int				get_texture_color(mlx_texture_t *texture, int x, int y);
-double			get_tx(t_data *game, t_ray *rays, mlx_texture_t *img);
-int				get_ty(int y_screen, int wall_top, int wall_height,
-					mlx_texture_t *tex);
-mlx_texture_t	*choose_tex(t_data *game);
+// ray_caster
+void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map);
+void	calc_walls(int x, t_data *game, t_ray *ray, t_player *player);
+// minimap
+void	minimap(t_data *game);
+void	mm_cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map);
+// textures
+int		get_tex_px(t_data *game, int start, int wallheight, int y);
 #endif

@@ -76,8 +76,6 @@ typedef struct s_data
 	double			tile;
 	int				sky_color;
 	int				floor;
-	int				win_width;
-	int				win_height;
 	int				check_list[6];
 	// t_sprite        *sprites[50];
 }					t_data;
