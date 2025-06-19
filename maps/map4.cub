@@ -1,10 +1,10 @@
 F 55,55,100
-C 240,240,255
+C 22,20,255
 
-NO textures/11.png
-SO textures/22.png
-WE textures/33.png
-EA textures/44.png
+NO textures/scene4/1.png
+SO textures/scene4/2.png
+WE textures/scene4/3.png
+EA textures/scene4/4.png
 
 1111111111111111111
 1E00000000000000001

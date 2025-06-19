@@ -6,29 +6,33 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/17 15:08:19 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:14:06 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "moves.h"
 
-// sets 20 pixel offset to wall to keep realistic distance
+// sets offset to wall (depending on tile_size) to keep realistic distance
 // if angle is negative movement on y || x is negative
-void	set_offset(t_player *player, double angle_x, double angle_y)
+void	set_offset(t_data *game, t_player *player, double angle_x, double angle_y)
 {
+	int off;
+	
+	off = game->tile / 3;
 	if (angle_x < 0)
-		player->xo = -20;
+		player->xo = -off;
 	else
-		player->xo = 20;
+		player->xo = off;
 	if (angle_y < 0)
-		player->yo = -20;
+		player->yo = -off;
 	else
-		player->yo = 20;
+		player->yo = off;
+		printf("off %d\n", off);
 }
 
 // same as horizontal movement, but adjustes angle to
 // + a quarter circle (90°) for right and - quarter circle for left
-void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
+void	move_player2(t_data *game, mlx_key_data_t data, t_player *player, t_map *map)
 {
 	double	pdx;
 	double	pdy;
@@ -45,10 +49,10 @@ void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
 	}
 	if (data.key == MLX_KEY_A || data.key == MLX_KEY_D)
 	{
-		set_offset(player, pdx, pdy);
-		if (map->m[(int)(player->py + player->yo + pdy * player->speed)
-			/ 64][(int)(player->px + player->xo + pdx * player->speed)
-			/ 64] != '1')
+		set_offset(game, player, pdx, pdy);
+		if (map->m[(int)((player->py + player->yo + pdy * player->speed)
+			/ game->tile)][(int)((player->px + player->xo + pdx * player->speed)
+			/ game->tile)] != '1')
 		{
 			player->px += pdx * player->speed;
 			player->py += pdy * player->speed;
@@ -59,14 +63,14 @@ void	move_player2(mlx_key_data_t data, t_player *player, t_map *map)
 // checks if the position p is moving towards is open space
 // (uses current position, adds 20 px for realistic wall-distance and moves
 // speed steps on the y direction + x direction)
-void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
+void	move_player(t_data *game, mlx_key_data_t data, t_player *player, t_map *map)
 {
 	if (data.key == MLX_KEY_W)
 	{
-		set_offset(player, player->pdx, player->pdy);
-		if (map->m[(int)(player->py + player->yo + player->pdy * player->speed)
-			/ 64][(int)(player->px + player->xo + player->pdx * player->speed)
-			/ 64] != '1')
+		set_offset(game, player, player->pdx, player->pdy);
+		if (map->m[(int)((player->py + player->yo + player->pdy * player->speed)
+			/ game->tile)][(int)((player->px + player->xo + player->pdx * player->speed)
+			/ game->tile)] != '1')
 		{
 			player->px += player->pdx * player->speed;
 			player->py += player->pdy * player->speed;
@@ -74,17 +78,17 @@ void	move_player(mlx_key_data_t data, t_player *player, t_map *map)
 	}
 	else if (data.key == MLX_KEY_S)
 	{
-		set_offset(player, player->pdx, player->pdy);
-		if (map->m[(int)(player->py - player->yo - player->pdy * player->speed)
-			/ 64][(int)(player->px - player->xo - player->pdx * player->speed)
-			/ 64] != '1')
+		set_offset(game, player, player->pdx, player->pdy);
+		if (map->m[(int)((player->py - player->yo - player->pdy * player->speed)
+			/ game->tile)][(int)((player->px - player->xo - player->pdx * player->speed)
+			/ game->tile)] != '1')
 		{
 			player->px -= player->pdx * player->speed;
 			player->py -= player->pdy * player->speed;
 		}
 	}
 	else
-		move_player2(data, player, map);
+		move_player2(game, data, player, map);
 }
 
 // changes player angle around 12°
@@ -118,7 +122,7 @@ void	key_callback(mlx_key_data_t data, void *param)
 			mlx_close_window(game->mlx);
 		else if (data.key == MLX_KEY_W || data.key == MLX_KEY_S
 			|| data.key == MLX_KEY_A || data.key == MLX_KEY_D)
-			move_player(data, player, game->map);
+			move_player(game, data, player, game->map);
 		else if (data.key == MLX_KEY_RIGHT || data.key == MLX_KEY_LEFT)
 			change_direction(data, player);
 		cast_rays(game, player, game->ray, game->map);
