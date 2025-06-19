@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/19 10:14:15 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:27:02 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ t_data *map_parsing(char **map)
 	if (data == NULL)
 		exit_fail("Cub3D: Error memory allocation failed!\n");
 	gc_track(data);
-	///data->mouse_posx
+	data->mouse_pos = data->win_width / 2;
 	data->m = configuration(map, &data);
 	check_for_valid_chars(data->m);
 	find_player_position(data->m, &player_y, &player_x);

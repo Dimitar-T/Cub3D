@@ -68,7 +68,7 @@ typedef struct s_data
     int             win_width;
     int             win_height;
     int             check_list[6];
-    int             mouse_pos;
+    double             mouse_pos;
     // t_sprite        *sprites[50];
 }               t_data;
 

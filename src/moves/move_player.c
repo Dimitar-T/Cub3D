@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/18 16:35:53 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:24:40 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,9 @@ void	change_direction(mlx_key_data_t data, t_player *player)
 
 void	update_keys(void *param)
 {
-	t_data		*game;
-	t_player	*p;
-
-	game = (t_data *)param;
-	p = game->player;
+	t_data *game = (t_data *)param;
+	t_player *p = game->player;
+	
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		move_player((mlx_key_data_t){.key = MLX_KEY_W}, p, game->map);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
@@ -126,6 +124,25 @@ void	update_keys(void *param)
 		change_direction((mlx_key_data_t){.key = MLX_KEY_RIGHT}, p);
 	cast_rays(game, p, game->ray, game->map);
 }
+
+// void	mouse_callback(double xpos, double ypos, void *param)
+// {
+// 	t_data *game = (t_data *)param;
+// 	t_player *p = game->player;
+
+// 	double delta_x = xpos - game->mouse_pos;
+// 	game->mouse_pos = xpos;
+
+// 	if (delta_x != 0)
+// 	{
+// 		// Adjust this sensitivity as needed
+// 		double sensitivity = 0.0001;
+// 		p->pa += delta_x * sensitivity;
+// 		p->pdx = cos(p->pa);
+// 		p->pdy = sin(p->pa);
+// 		cast_rays(game, p, game->ray, game->map);
+// 	}
+// }
 
 void	key_callback(mlx_key_data_t data, void *param)
 {

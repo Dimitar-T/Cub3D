@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/17 15:21:10 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:31:42 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,34 +83,69 @@ void	change_direction(mlx_key_data_t data, t_player *player)
 {
 	if (data.key == MLX_KEY_RIGHT)
 	{
-		player->pa += 0.2;
+		player->pa += 0.02;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
 	else if (data.key == MLX_KEY_LEFT)
 	{
-		player->pa -= 0.2;
+		player->pa -= 0.02;
 		player->pdx = cos(player->pa);
 		player->pdy = sin(player->pa);
 	}
 }
 
+static void	update_mouse(t_data **game, t_player **p)
+{
+	int cur_x;
+	int cur_y;
+	int center_x;
+	double delta_x;
+
+	center_x = (* game)->win_width / 2;
+	mlx_get_mouse_pos((* game)->mlx, &cur_x, &cur_y);
+	delta_x = (cur_x - center_x) * 0.0003; // sensitivity factor
+	if (delta_x != 0)
+	{
+		(* p)->pa += delta_x;
+		(* p)->pdx = cos((* p)->pa);
+		(* p)->pdy = sin((* p)->pa);
+		mlx_set_mouse_pos((* game)->mlx, center_x, cur_y);
+	}
+}
+
+void	update_keys(void *param)
+{
+	t_data *game;
+	t_player *p;
+	
+	game = (t_data *)param;
+	p = game->player;
+	update_mouse(&game, &p);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		move_player((mlx_key_data_t){.key = MLX_KEY_W}, p, game->map);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		move_player((mlx_key_data_t){.key = MLX_KEY_S}, p, game->map);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		move_player((mlx_key_data_t){.key = MLX_KEY_A}, p, game->map);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		move_player((mlx_key_data_t){.key = MLX_KEY_D}, p, game->map);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		change_direction((mlx_key_data_t){.key = MLX_KEY_LEFT}, p);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		change_direction((mlx_key_data_t){.key = MLX_KEY_RIGHT}, p);
+	cast_rays(game, p, game->ray, game->map);
+}
+
 void	key_callback(mlx_key_data_t data, void *param)
 {
 	t_data		*game;
-	t_player	*player;
 
 	game = (t_data *)param;
-	player = game->player;
-	if (data.action == MLX_PRESS || data.action == MLX_REPEAT)
+
+	if (data.action == MLX_PRESS)
 	{
 		if (data.key == MLX_KEY_ESCAPE)
 			mlx_close_window(game->mlx);
-		else if (data.key == MLX_KEY_W || data.key == MLX_KEY_S
-			|| data.key == MLX_KEY_A || data.key == MLX_KEY_D)
-			move_player(data, player, game->map);
-		else if (data.key == MLX_KEY_RIGHT || data.key == MLX_KEY_LEFT)
-			change_direction(data, player);
-		cast_rays(game, player, game->ray, game->map);
 	}
 }

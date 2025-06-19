@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/16 19:26:19 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:29:55 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_arguments_checker(int argc)
+static void ft_arguments_checker(int argc)
 {
-	if(argc > 2 || argc < 2 )
+	if (argc > 2 || argc < 2)
 	{
-		write(2,"Cub3D: Error expected two arguments, executable and a .cub map\n",63);
+		write(2, "Cub3D: Error expected two arguments, executable and a .cub map\n", 63);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 {
 	char **map;
 	t_data *game;
-	
+
 	ft_arguments_checker(argc);
 	map = file_parsing(argv);
 	strip_trailing_newlines(map);
@@ -49,12 +49,15 @@ int main(int argc, char **argv)
 	game = map_parsing(map);
 	if (game == NULL)
 		return (-1);
-	// (void)map;
+
 	init_game(game);
 	cast_rays(game, game->player, game->ray, game->map);
 	minimap(game);
-    mlx_key_hook(game->mlx, key_callback, game);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	mlx_set_mouse_pos(game->mlx, game->win_width / 2, game->win_height / 2);
+	mlx_key_hook(game->mlx, key_callback, game);
+	mlx_loop_hook(game->mlx, update_keys, game);
 	mlx_loop(game->mlx);
-    gc_free_all();
-    return(0);
+	gc_free_all();
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/16 19:25:53 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:42:31 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void init_pos(char **map, t_player *player)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (map[y])
+	y = -1;
+	while (map[++y])
 	{
-		x = 0;
-		while (map[y][x] != '\0')
+		x = -1;
+		while (map[y][++x] != '\0')
 		{
 			if (map[y][x] == 'N')
             {
@@ -51,9 +51,7 @@ void init_pos(char **map, t_player *player)
                 player->px = x * 64 + 32;
                 player->py = y * 64 + 32;
             }
-			x++;
 		}
-		y++;
 	}
 }
 
@@ -67,7 +65,7 @@ t_player   *init_player(t_map *map)
     init_pos(map->m, player);
     player->pdx = cos(player->pa);
     player->pdy = sin(player->pa);
-    player->speed = 8.0;
+    player->speed = 1.15;
     player->yo = 0;
     player->xo = 0;
     return(player);
