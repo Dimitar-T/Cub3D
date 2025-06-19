@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 14:42:31 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:54:56 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_player   *init_player(t_map *map)
     init_pos(map->m, player);
     player->pdx = cos(player->pa);
     player->pdy = sin(player->pa);
-    player->speed = 1.15;
+    player->speed = 1.35;
     player->yo = 0;
     player->xo = 0;
     return(player);

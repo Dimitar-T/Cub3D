@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/17 17:08:43 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:49:01 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ int	get_texture_color(mlx_texture_t *tex, int x, int y)
 	return (agbr[3] << 24 | agbr[2] << 16 | agbr[1] << 8 | agbr[0]);
 }
 
-double	get_tx(t_ray *ray, mlx_texture_t *tex)
+double	get_tx(t_data *game, t_ray *ray, mlx_texture_t *tex)
 {
 	if (ray->vert)
-		return (fmodf(ray->ry * (tex->width / 64), tex->width));
-	return (fmodf(ray->rx * (tex->width / 64), tex->width));
+		return (fmodf(ray->ry * (tex->width / game->tile), tex->width));
+	return (fmodf(ray->rx * (tex->width / game->tile), tex->width));
 }
 
-int	get_ty(int y, int wall_top, int wall_height, mlx_texture_t *tex)
+int	get_ty(int y, int start, int wall_height, mlx_texture_t *tex)
 {
 	int	tex_y;
-
+	
 	if (wall_height <= 0 || !tex)
 		return (0);
-	tex_y = (int)(((double)(y - wall_top) / (double)wall_height) * tex->height);
+	tex_y = (int)(((double)(y - start) / (double)wall_height) * tex->height);
 	if (tex_y < 0)
 		tex_y = 0;
 	if (tex_y >= (int)tex->height)

@@ -1,10 +1,10 @@
 F 77,10,76
 C 99,45,99
 
-NO textures/11.png
-SO textures/22.png
-WE textures/33.png
-EA textures/44.png
+NO textures/scene2/1.png
+SO textures/scene2/2.png
+WE textures/scene2/3.png
+EA textures/scene2/4.png
 
 111111111111111111111111111111111111
 100000000000000111000000000000000001
