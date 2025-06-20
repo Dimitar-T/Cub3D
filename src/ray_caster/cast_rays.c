@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 14:04:49 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:36:53 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	perform_dda(t_ray *ray, int step_x, int step_y, t_map *map)
 // to infinite if direction = 0 (to avoid division by 0)
 // else setting it to how far ray travels to cross one grid cell
 // side_distance = distance from ray to next grid line
+// printf("ddx %d ddy %d sdx %d sdy %d\n", (int)ray->delta_dx,
+//(int)ray->delta_dy, (int)ray->side_dx, (int)ray->side_dy);
 void	calc_distances(t_data *game, t_ray *ray)
 {
 	if (ray->rdx == 0)
@@ -80,10 +82,9 @@ void	calc_distances(t_data *game, t_ray *ray)
 		ray->side_dy = (ray->ry / game->tile - ray->my) * ray->delta_dy;
 	else
 		ray->side_dy = (ray->my + 1.0 - ray->ry / game->tile) * ray->delta_dy;
-		// printf("ddx %d ddy %d sdx %d sdy %d\n", (int)ray->delta_dx, (int)ray->delta_dy, (int)ray->side_dx, (int)ray->side_dy);
 }
 
-//setup for calculations (step size depending on direction & map_x, map_y)
+// setup for calculations (step size depending on direction & map_x, map_y)
 void	calc_rays(t_data *game, t_ray *ray, t_map *map)
 {
 	int	step_x;

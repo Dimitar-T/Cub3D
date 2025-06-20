@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 14:45:17 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:25:34 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_texture_color(mlx_texture_t *tex, int x, int y)
 	agbr[0] = (color >> 24) & 0xFF;
 	agbr[1] = (color >> 16) & 0xFF;
 	agbr[2] = (color >> 8) & 0xFF;
-	agbr[3] = (color)&0xFF;
+	agbr[3] = (color) & 0xFF;
 	return (agbr[3] << 24 | agbr[2] << 16 | agbr[1] << 8 | agbr[0]);
 }
 
@@ -39,7 +39,7 @@ double	get_tx(t_data *game, t_ray *ray, mlx_texture_t *tex)
 int	get_ty(int y, int start, int wall_height, mlx_texture_t *tex)
 {
 	int	tex_y;
-	
+
 	if (wall_height <= 0 || !tex)
 		return (0);
 	tex_y = (int)(((double)(y - start) / (double)wall_height) * tex->height);

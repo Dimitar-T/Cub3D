@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:25:20 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/17 16:53:43 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:18:54 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	mm_draw_player(t_data *game)
 	int	px;
 	int	py;
 
-	px = game->player->px * MINIMAP_SCALE;
-	py = game->player->py * MINIMAP_SCALE;
-	if (game->player->px >= 0 && (int)game->player->px < game->win_width
-		&& game->player->py >= 0 && (int)game->player->py < game->win_height)
+	px = game->player->px * (10 / game->tile);
+	py = game->player->py * (10 / game->tile);
+	if (game->player->px >= 0 && (int)game->player->px < WIN_WIDTH
+		&& game->player->py >= 0 && (int)game->player->py < WIN_HEIGHT)
 	{
 		mlx_put_pixel(game->img, px, py, 0xFF0000FF);
 		mlx_put_pixel(game->img, px + 1, py, 0xFF0000FF);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_util_bonus.c                           :+:      :+:    :+:   */
+/*   map_parsing_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/18 16:36:32 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:17:06 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int valid_texture_extention(char *filename)
 	
 }
 
-void validate_texture_path(char *path)
+void validate_texture_path(char *path, char *key, t_data **data)
 {
 	if(valid_texture_extention(path) == false)
 		exit_fail("Cub3D: Error texture is not in a valid format\n");
@@ -69,5 +69,16 @@ void validate_texture_path(char *path)
 		path++;
 	if (!path || ft_strlen(path) == 0)
 		exit_fail("Cub3D: Empty texture path\n");
+	// printf("debug %s\n", path);
 	get_fd(path);
+	if(key[0] == 'E') //EWSN
+    	(*data)->te = mlx_load_png(path);
+	else if(key[0] == 'W')
+		(*data)->tw = mlx_load_png(path);
+	else if(key[0] == 'S')
+		(*data)->ts = mlx_load_png(path);
+	else if(key[0] == 'N')
+    	(*data)->tn = mlx_load_png(path);
+    // if ((* data)->tn == NULL || (* data)->ts == NULL || (* data)->tw == NULL || (* data)->te == NULL)
+    // exit_fail("init: mlx failed to load png");
 }

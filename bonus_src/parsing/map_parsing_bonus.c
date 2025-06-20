@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/18 16:47:10 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:39:33 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void check_config(char *row, t_data **data)
 			if (i < 2)
 				rgb_range_checker(row, i, data);
 			else
-				validate_texture_path(row + ft_strlen(key[i]));
+				validate_texture_path(row + ft_strlen(key[i]), key[i], data);
 			break;
 		}
 	}
@@ -133,20 +133,22 @@ t_data *map_parsing(char **map)
 	char	**map_copy;
 	
 	data = ft_calloc(1, sizeof(t_data));
+	if (data == NULL)
+		exit_fail("Cub3D: Error memory allocation failed!\n");
+	gc_track(data);
+	// data->mouse_pos = data->win_width / 2;
 	data->m = configuration(map, &data);
 	check_for_valid_chars(data->m);
 	find_player_position(data->m, &player_y, &player_x);
 	map_copy = copy_map(data->m);
 	flood_fill(map_copy, player_y, player_x);
 	
-	for (int i = 0; data->m[i]; i++)
-	{
-		for (int y = 0; data->m[i][y]; y++)
-		{
-			printf("%d\n", data->m[i][y]);
-		}
-		
-		
-	}
+	// for (int i = 0; data->m[i]; i++)
+	// {
+	// 	for (int y = 0; data->m[i][y]; y++)
+	// 	{
+	// 		printf("%d\n", data->m[i][y]);
+	// 	}
+	// }
 	return (data);
 }

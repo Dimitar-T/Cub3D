@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/20 17:28:13 by jwardeng          #+#    #+#             */
+/*   Updated: 2025/06/20 17:28:22 by jwardeng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INIT_H
 # define INIT_H
 
 # include "../cub3d.h"
 
-# define WIN_WIDTH 1920
+# define WIN_WIDTH 1200
 # define WIN_HEIGHT 1080
 
 typedef struct s_player
@@ -33,6 +45,8 @@ typedef struct s_ray
 	double			delta_dy;
 	double			side_dy;
 	double			walld;
+	double			start;
+	double			height;
 	double			mm_rx;
 	double			mm_ry;
 

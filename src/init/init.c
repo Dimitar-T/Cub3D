@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 15:29:35 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:27:06 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ t_ray	*init_rays(t_player *player)
 	ray->ra = player->pa;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = cos(ray->ra);
-    ray->mx = 0;
-    ray->my = 0;
-    ray->delta_dx = 0;
-    ray->delta_dy = 0;
-    ray->side_dx = 0;
-    ray->side_dy = 0;
+	ray->mx = 0;
+	ray->my = 0;
+	ray->delta_dx = 0;
+	ray->delta_dy = 0;
+	ray->side_dx = 0;
+	ray->side_dy = 0;
 	ray->walld = 0;
 	ray->vert = -1;
 	ray->mm_rx = 0;
@@ -173,16 +173,17 @@ t_ray	*init_rays(t_player *player)
 // game->sprites[i] = NULL;
 // }
 
-int tile_size(int x, int y)
+int	tile_size(int x, int y)
 {
-	int tile_width;
-	int tile_height;
+	int	tile_width;
+	int	tile_height;
+
 	tile_width = WIN_WIDTH / x;
 	tile_height = WIN_HEIGHT / y;
 	if (tile_width < tile_height)
-	return(tile_width);
+		return (tile_width);
 	else
-	return(tile_height);
+		return (tile_height);
 }
 
 t_data	*init_game(t_data *game)

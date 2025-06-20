@@ -6,14 +6,14 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:22:35 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 12:05:50 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:25:09 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
 
 // calculates delta (difference) between px and ray hit and uses dda for steps
-void	mm_draw_ray(t_data *game, t_player *player, t_ray *ray)
+void	mm_draw_ray(t_data *game, t_player *player, t_ray *ray, double mms)
 {
 	double	x_inc;
 	double	y_inc;
@@ -21,21 +21,20 @@ void	mm_draw_ray(t_data *game, t_player *player, t_ray *ray)
 	double	dify;
 	int		i;
 
-	difx = ((ray->mm_rx * (10 / game->tile)) - (player->px * (10 / game->tile)));
-	dify = ((ray->mm_ry * (10 / game->tile)) - (player->py * (10 / game->tile)));
+	difx = ((ray->mm_rx * mms) - (player->px * mms));
+	dify = ((ray->mm_ry * mms) - (player->py * mms));
 	x_inc = difx / fmax(fabs(difx), fabs(dify));
 	y_inc = dify / fmax(fabs(difx), fabs(dify));
-	if (game->player->px >= 0 && (int)game->player->px < WIN_WIDTH
-		&& game->player->py >= 0 && (int)game->player->py < WIN_HEIGHT
-		&& game->ray->mm_rx >= 0 && (int)game->ray->mm_rx < WIN_WIDTH
-		&& game->ray->mm_ry >= 0 && (int)game->ray->mm_ry < WIN_HEIGHT)
+	if (player->px >= 0 && player->px < WIN_WIDTH && player->py >= 0
+		&& (int)player->py < WIN_HEIGHT && ray->mm_rx >= 0
+		&& (int)ray->mm_rx < WIN_WIDTH && ray->mm_ry >= 0
+		&& (int)ray->mm_ry < WIN_HEIGHT)
 	{
 		i = 1;
 		while (i <= fmax(fabs(difx), fabs(dify)))
 		{
-			mlx_put_pixel(game->img, (int)(game->player->px * (10 / game->tile) + i
-					* x_inc), (int)(game->player->py * (10 / game->tile) + i
-					* y_inc), 0x00FF00FF);
+			mlx_put_pixel(game->img, (int)(player->px * mms + i * x_inc),
+				(int)(player->py * mms + i * y_inc), 0x00FF00FF);
 			i++;
 		}
 	}
@@ -76,7 +75,9 @@ void	mm_cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 	int		x;
 	double	start_angle;
 	int		step;
+	double	mms;
 
+	mms = (10 / game->tile);
 	x = 0;
 	step = 100;
 	start_angle = player->pa - FOV / 2;
@@ -88,7 +89,7 @@ void	mm_cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		ray->rdx = cos(ray->ra);
 		ray->rdy = sin(ray->ra);
 		mm_find_wall(game, ray, map);
-		mm_draw_ray(game, player, ray);
+		mm_draw_ray(game, player, ray, mms);
 		x += step;
 	}
 }

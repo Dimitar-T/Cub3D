@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/17 17:08:54 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:43:30 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ int	get_texture_color(mlx_texture_t *tex, int x, int y)
 	agbr[0] = (color >> 24) & 0xFF;
 	agbr[1] = (color >> 16) & 0xFF;
 	agbr[2] = (color >> 8) & 0xFF;
-	agbr[3] = (color)&0xFF;
+	agbr[3] = (color) & 0xFF;
 	return (agbr[3] << 24 | agbr[2] << 16 | agbr[1] << 8 | agbr[0]);
 }
 
-double	get_tx(t_ray *ray, mlx_texture_t *tex)
+double	get_tx(t_data *game, t_ray *ray, mlx_texture_t *tex)
 {
 	if (ray->vert)
-		return (fmodf(ray->ry * (tex->width / 64), tex->width));
-	return (fmodf(ray->rx * (tex->width / 64), tex->width));
+		return (fmodf(ray->ry * (tex->width / game->tile), tex->width));
+	return (fmodf(ray->rx * (tex->width / game->tile), tex->width));
 }
 
-int	get_ty(int y, int wall_top, int wall_height, mlx_texture_t *tex)
+int	get_ty(int y, int start, int wall_height, mlx_texture_t *tex)
 {
 	int	tex_y;
 
 	if (wall_height <= 0 || !tex)
 		return (0);
-	tex_y = (int)(((double)(y - wall_top) / (double)wall_height) * tex->height);
+	tex_y = (int)(((double)(y - start) / (double)wall_height) * tex->height);
 	if (tex_y < 0)
 		tex_y = 0;
 	if (tex_y >= (int)tex->height)
@@ -71,4 +71,18 @@ mlx_texture_t	*choose_tex(t_data *game)
 	}
 	else
 		return (game->d);
+}
+
+int	get_tex_px(t_data *game, int start, int wallheight, int y)
+{
+	int				tex_x;
+	int				tex_y;
+	int				color;
+	mlx_texture_t	*tex;
+
+	tex = choose_tex(game);
+	tex_x = get_tx(game, game->ray, tex);
+	tex_y = get_ty(y, start, wallheight, tex);
+	color = get_texture_color(tex, tex_x, tex_y);
+	return (color);
 }

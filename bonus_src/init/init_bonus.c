@@ -3,112 +3,111 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/19 14:54:56 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:49:23 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 #include <math.h>
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
 
-void init_pos(char **map, t_player *player)
+void	init_pos(t_data *game, char **map, t_player *player)
 {
 	int	x;
 	int	y;
 
-	y = -1;
-	while (map[++y])
+	y = 0;
+	while (map[y])
 	{
-		x = -1;
-		while (map[y][++x] != '\0')
+		x = 0;
+		while (map[y][x] != '\0')
 		{
-			if (map[y][x] == 'N')
-            {
-				player->pa = 3 * M_PI / 2;
-                player->px = x * 64 + 32;
-                player->py = y * 64 + 32;
-            }
-            else if (map[y][x] == 'S')
-            {
-                player->pa = M_PI / 2;
-                player->px = x * 64 + 32;
-                player->py = y * 64 + 32;
-            }
-            else if (map[y][x] == 'E')
-            {
-                player->pa = 0;
-                player->px = x * 64 + 32;
-                player->py = y * 64 + 32;
-            }
-            else if (map[y][x] == 'W')
-            {
-                player->pa = M_PI;
-                player->px = x * 64 + 32;
-                player->py = y * 64 + 32;
-            }
+			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+				|| map[y][x] == 'W')
+			{
+				if (map[y][x] == 'N')
+					player->pa = 3 * M_PI / 2;
+				else if (map[y][x] == 'S')
+					player->pa = M_PI / 2;
+				else if (map[y][x] == 'E')
+					player->pa = 0;
+				else if (map[y][x] == 'W')
+					player->pa = M_PI;
+				player->px = x * game->tile + (game->tile / 2);
+				player->py = y * game->tile + (game->tile / 2);
+			}
+			x++;
 		}
+		y++;
 	}
 }
 
-t_player   *init_player(t_map *map)
+t_player	*init_player(t_data *game, t_map *map)
 {
-    t_player    *player;
+	t_player	*player;
 
-    player = gc_malloc(sizeof(t_player));
-    if (!player)
-    exit_fail("init: allocation fail\n");
-    init_pos(map->m, player);
-    player->pdx = cos(player->pa);
-    player->pdy = sin(player->pa);
-    player->speed = 1.35;
-    player->yo = 0;
-    player->xo = 0;
-    return(player);
+	player = malloc(sizeof(t_player));
+	if (!player)
+		exit_fail("init: allocation fail\n");
+	init_pos(game, map->m, player);
+	player->pdx = cos(player->pa);
+	player->pdy = sin(player->pa);
+	player->speed = 4.0;
+	player->yo = 0;
+	player->xo = 0;
+	return (player);
 }
 
-t_map   *init_map(char **m)
+t_map	*init_map(char **m)
 {
-    t_map *map;
-    
-    map = gc_malloc(sizeof(t_map));
-    int y = 0;
-    if (!map)
-    exit_fail("init: allocation fail\n");;   
-    map->m = m;
-    map->mx = ft_strlen(map->m[0]);
-    while (map->m[y] != NULL)
-    y++;
-    map->my = y;
-    return(map);
+	t_map	*map;
+	int		y;
+
+	map = gc_malloc(sizeof(t_map));
+	if (!map)
+		exit_fail("init: allocation fail\n");
+	y = 0;
+	map->m = m;
+	map->mx = ft_strlen(map->m[0]);
+	while (map->m[y] != NULL)
+		y++;
+	map->my = y;
+	return (map);
 }
 
-t_ray   *init_rays(t_player *player)
+t_ray	*init_rays(t_player *player)
 {
-    t_ray *ray;
+	t_ray	*ray;
 
-    ray = gc_malloc(sizeof(t_ray));
-    if (!ray)
-    exit_fail("init: allocation fail\n");
-    ray->rx = 0;
-    ray->ry = 0;
-    ray->ra = player->pa;
-    ray->rdx = cos(ray->ra);
-    ray->rdy = cos(ray->ra);
-    ray->vert = -1;
-    ray->mm_rx = 0;
-    ray->mm_ry = 0;
-    return(ray);
+	ray = gc_malloc(sizeof(t_ray));
+	if (!ray)
+		exit_fail("init: allocation fail\n");
+	ray->rx = 0;
+	ray->ry = 0;
+	ray->ra = player->pa;
+	ray->rdx = cos(ray->ra);
+	ray->rdy = cos(ray->ra);
+	ray->mx = 0;
+	ray->my = 0;
+	ray->delta_dx = 0;
+	ray->delta_dy = 0;
+	ray->side_dx = 0;
+	ray->side_dy = 0;
+	ray->walld = 0;
+	ray->vert = -1;
+	ray->mm_rx = 0;
+	ray->mm_ry = 0;
+	return (ray);
 }
 
 // t_sprite *init_sprite_pos(t_assets *assets, int i, int x, int y)
 // {
 //     t_sprite *sprite;
-    
+
 //     sprite = malloc(sizeof(t_sprite));
 //     sprite->id = i;
 //     sprite->sx = x * 64;
@@ -124,7 +123,7 @@ t_ray   *init_rays(t_player *player)
 //     mlx_texture_t *sp2;
 //     mlx_texture_t *sp3;
 //     mlx_texture_t *sp4;
-    
+
 //     assets = malloc(sizeof(t_assets));
 //     sp1 = mlx_load_png("../../textures/sprite/turtle_walk1.png");
 //     sp2 = mlx_load_png("../../textures/sprite/turtle_walk2.png");
@@ -135,7 +134,7 @@ t_ray   *init_rays(t_player *player)
 //         // You could also log which one failed for easier debugging
 //         printf("ey\n");
 //         free(assets);
-//         return NULL;
+//         return (NULL);
 //     }
 //     assets->s1 = mlx_texture_to_image(game->mlx, sp1);
 //     assets->s2 = mlx_texture_to_image(game->mlx, sp2);
@@ -150,7 +149,7 @@ t_ray   *init_rays(t_player *player)
 // 	int	y;
 //     int i;
 //     t_assets *assets;
-    
+
 // 	y = 0;
 //     i = 0;
 //     assets = init_assets(game);
@@ -174,34 +173,39 @@ t_ray   *init_rays(t_player *player)
 // game->sprites[i] = NULL;
 // }
 
-void init_textures(t_data *game)
+int	tile_size(int x, int y)
 {
-    game->tn = mlx_load_png("textures/11.png");
-    game->ts = mlx_load_png("textures/22.png");
-    game->te = mlx_load_png("textures/33.png");
-    game->tw = mlx_load_png("textures/44.png");
-    game->d = mlx_load_png("textures/door.png");
-    if (game->tn == NULL || game->ts == NULL || game->tw == NULL
-        || game->d == NULL || game->te == NULL)
-    exit_fail("init: mlx failed to load png");
+	int	tile_width;
+	int	tile_height;
+
+	tile_width = WIN_WIDTH / x;
+	tile_height = WIN_HEIGHT / y;
+	if (tile_width < tile_height)
+		return (tile_width);
+	else
+		return (tile_height);
 }
 
-t_data *init_game(t_data *game)
+t_data	*init_game(t_data *game)
 {
-    game->map = init_map(game->m);
-    game->player = init_player(game->map);
-    game->ray = init_rays(game->player);
-    game->win_width = game->map->mx * 64;
-    game->win_height = game->map->my * 64;
-    game->mlx = mlx_init(game->win_width, game->win_height, "Carto", true);
-    if (game->mlx == NULL)
-    exit_fail("init: allocation fail\n");
-    game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
-    if (game->img == NULL)
-    exit_fail("init: allocation fail\n");
-    // init_sprite(game->map->m, game);
-    init_textures(game);
-    if (mlx_image_to_window(game->mlx, game->img, 0, 0) == -1)
-    exit_fail("init: mlx failure image to window\n");
-    return(game);
+	game->map = init_map(game->m);
+	game->tile = tile_size(game->map->mx, game->map->my);
+	printf("ts %d\n", (int)game->tile);
+	game->player = init_player(game, game->map);
+	game->ray = init_rays(game->player);
+	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Carto", true);
+	if (game->mlx == NULL)
+		exit_fail("init: allocation fail\n");
+	mlx_set_window_limit(game->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_WIDTH,
+		WIN_HEIGHT);
+	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (game->img == NULL)
+		exit_fail("init: allocation fail\n");
+	if (mlx_image_to_window(game->mlx, game->img, 0, 0) == -1)
+		exit_fail("init: mlx failure image to window\n");
+	game->d = mlx_load_png("textures/door.png");
+	if (!game->d)
+	exit_fail("init: allocation fail\n");
+	game->door = 0;
+	return (game);
 }
