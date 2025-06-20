@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/20 18:05:37 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:46:01 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int main(int argc, char **argv)
 	game = map_parsing(map);
 	if (game == NULL)
 		return (-1);
-	// (void)map;
 	init_game(game);
 	print_data(game);
 	printf("miao\n");
 	cast_rays(game, game->player, game->ray, game->map);
 	printf("miao\n");
 	minimap(game);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
     mlx_key_hook(game->mlx, key_callback, game);
 	mlx_loop_hook(game->mlx, update_keys, game);
 	mlx_loop(game->mlx);
