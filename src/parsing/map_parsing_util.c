@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/19 10:17:06 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:34:43 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 		value = ft_atoi(split[i]);
 		if (value < 0 || value > 255)
 			exit_fail("Cub3D: RGB values must be between 0 and 255\n");
-		if (f_or_c == 0)
-			(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split[i]))) + value;
 		if (f_or_c == 1)
+			(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split[i]))) + value;
+		if (f_or_c == 0)
 			(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split[i]))) + value;
 		// printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
 	}

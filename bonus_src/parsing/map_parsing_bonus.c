@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/18 16:47:10 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:35:23 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void check_for_dup(t_data **data)
 	i = -1;
 	while (++i < 6)
 	{
-		// printf("checklist %i\n",(*data)->check_list[i]);
 		if ((*data)->check_list[i] != 1)
 			exit_fail("Cub3D: Error duplicate or missing configuration!\n");
 	}
