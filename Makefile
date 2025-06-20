@@ -1,11 +1,12 @@
 NAME	= cub3D
 BONUS_NAME = cub3D_bonus
-CFLAGS	= -Wextra -Wall -Wunreachable-code -O3 -g 
+CFLAGS	= -Wextra -Wall -Wunreachable-code -O3 -g
 LIBMLX	= ./MLX42
 LIBFT = ./libft
 
 HEADERS = -I ./include -I $(LIBMLX)/include -I $(LIBMLX) $(INCLUDES)
-LDFLAGS = -L/opt/homebrew/lib
+LDFLAGS = -L/usr/local/lib
+LDFLAGS += -fsanitize=address
 INCLUDES = -I/opt/homebrew/include
 LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm $(LIBFT)/libft.a $(LDFLAGS)
 
