@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   move_player_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 17:26:39 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:40:55 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,24 @@ void	change_direction(mlx_key_data_t data, t_player *player)
 		player->pdy = sin(player->pa);
 	}
 }
+static void update_mouse(t_data **game, t_player **p)
+{
+    int cur_x;
+    int cur_y;
+    int center_x;
+    double delta_x;
+
+    center_x = WIN_WIDTH / 2;
+    mlx_get_mouse_pos((* game)->mlx, &cur_x, &cur_y);
+    delta_x = (cur_x - center_x) * 0.0003; // sensitivity factor
+    if (delta_x != 0)
+    {
+        (* p)->pa += delta_x;
+        (* p)->pdx = cos((* p)->pa);
+        (* p)->pdy = sin((* p)->pa);
+        mlx_set_mouse_pos((* game)->mlx, center_x, cur_y);
+    }
+}
 
 void	update_keys(void *param)
 {
@@ -118,6 +136,7 @@ void	update_keys(void *param)
 
 	game = (t_data *)param;
 	p = game->player;
+	update_mouse(&game, &p);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		move_player(game, (mlx_key_data_t){.key = MLX_KEY_W}, p, game->map);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
