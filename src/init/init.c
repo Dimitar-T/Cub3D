@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 11:36:35 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:17:02 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_player	*init_player(t_data *game, t_map *map)
 	player_pos(game, map->m, player, y);
 	player->pdx = cos(player->pa);
 	player->pdy = sin(player->pa);
-	player->speed = 1.0;
+	player->speed = 4.0;
 	player->yo = 0;
 	player->xo = 0;
 	return (player);
@@ -80,6 +80,7 @@ t_data	*init_game(t_data *game)
 	game->player = init_player(game, game->map);
 	game->ray = init_rays(game->player);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Carto", true);
+	game->tss = 0;
 	if (game->mlx == NULL)
 		exit_fail("init: allocation fail\n");
 	mlx_set_window_limit(game->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_WIDTH,

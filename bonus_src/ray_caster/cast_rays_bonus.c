@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 18:20:08 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 13:59:00 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	calc_distances(t_data *game, t_ray *ray)
 }
 
 // setup for calculations (step size depending on direction & map_x, map_y)
-void	calc_rays(t_data *game, t_ray *ray, t_map *map)
+void	calc_rays(t_data *game, t_ray *ray)
 {
 	int	step_x;
 	int	step_y;
@@ -114,7 +114,7 @@ void	calc_rays(t_data *game, t_ray *ray, t_map *map)
 
 // FOV is set to 60° so we start casting rays at
 // -30° (from pa) and keep increasing up to + 30°
-void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
+void	cast_rays(t_data *game, t_player *player, t_ray *ray)
 {
 	int		x;
 	double	start_angle;
@@ -128,7 +128,7 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		ray->ry = player->py;
 		ray->rdx = cos(ray->ra);
 		ray->rdy = sin(ray->ra);
-		calc_rays(game, ray, map);
+		calc_rays(game, ray);
 		calc_walls(x, game, ray, player);
 		x++;
 	}

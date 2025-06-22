@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:28:13 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 11:36:43 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:13:55 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_data
 	mlx_texture_t	*te;
 	mlx_texture_t	*tw;
 	double			tile;
+	double			tss;
 	int				sky_color;
 	int				floor;
 	int				check_list[6];
