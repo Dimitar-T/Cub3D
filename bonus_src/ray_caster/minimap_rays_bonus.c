@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_rays.c                                     :+:      :+:    :+:   */
+/*   minimap_rays_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:22:35 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 17:25:09 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:28:56 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	mm_find_wall(t_data *game, t_ray *ray, t_map *map)
 		}
 		else
 			break ;
-		ray->mm_rx += ray->rdx * 2.5;
-		ray->mm_ry += ray->rdy * 2.5;
+		ray->mm_rx += ray->rdx * 0.1;
+		ray->mm_ry += ray->rdy * 0.1;
 	}
 }
 
