@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:24:48 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/22 16:06:22 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:50:33 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void exit_fail(char *message, t_data *game)
 		write(2, message, ft_strlen(message));
 	if (game != NULL)
 	{
-		// printf("hello'\n");
 		if (game->img)
 			mlx_delete_image(game->mlx, game->img);
 		if (game->tn)

@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/22 16:40:09 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:55:51 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,23 @@ static void strip_trailing_newlines(char **map)
 		i++;
 	}
 }
-// void	check_leaks(void)
-// {
-// 	write(1, "Checking for leaks...\n", 22);
-// 	system("leaks cub3D");  // use the name of your binary: cub3D or cub3D_bonus
-// }
+void	check_leaks(void)
+{
+	write(1, "Checking for leaks...\n", 22);
+	system("leaks cub3D");  // use the name of your binary: cub3D or cub3D_bonus
+}
 int main(int argc, char **argv)
 {
 	char **map;
 	t_data *game;
 	
-	// atexit(check_leaks);
+	atexit(check_leaks);
 	ft_arguments_checker(argc);
 	map = file_parsing(argv);
 	strip_trailing_newlines(map);
-	// printf("%s\n", map[0]);
-	// for (int i = 0; map[i] != NULL; i++)
-	// {
-	// 	printf("%s", map[i]);
-	// }
 	game = map_parsing(map);
 	if (game == NULL)
 		return (-1);
-	// (void)map;
 	init_game(game);
 	cast_rays(game, game->player, game->ray, game->map);
 	minimap(game);

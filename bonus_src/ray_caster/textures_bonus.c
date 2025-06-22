@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 17:43:30 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:28:50 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,16 @@ int	get_texture_color(mlx_texture_t *tex, int x, int y)
 
 double	get_tx(t_data *game, t_ray *ray, mlx_texture_t *tex)
 {
+	double	tx;
+
+	tx = 0;
 	if (ray->vert)
-		return (fmodf(ray->ry * (tex->width / game->tile), tex->width));
-	return (fmodf(ray->rx * (tex->width / game->tile), tex->width));
+		return (fmod(ray->ry * (tex->width / game->tile), tex->width));
+	else
+		tx = fmod(ray->rx * (tex->width / game->tile), tex->width);
+	if (game->tss == 1)
+		tx = tex->width - tx;
+	return (tx);
 }
 
 int	get_ty(int y, int start, int wall_height, mlx_texture_t *tex)
@@ -56,17 +63,17 @@ mlx_texture_t	*choose_tex(t_data *game)
 	{
 		if (game->ray->vert == 1)
 		{
-			if (game->ray->rdx > 0)
+			if (game->ray->rdx < 0)
 				return (game->tw);
 			else
 				return (game->te);
 		}
 		else
 		{
-			if (game->ray->rdy > 0)
+			if (game->ray->rdy < 0)
 				return (game->tn);
 			else
-				return (game->ts);
+				return (game->tss = 1, game->ts);
 		}
 	}
 	else

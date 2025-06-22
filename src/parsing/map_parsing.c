@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/22 15:57:29 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:53:52 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,11 @@ static void check_for_dup(t_data **data)
 	i = -1;
 	while (++i < 6)
 	{
-		printf("checklist: %d\n", (*data)->check_list[i]);
 		if ((*data)->check_list[i] != 1)
 			exit_fail("Cub3D: Error duplicate or missing configuration!\n", NULL);
 	}
 }
-static void print_data(t_data *data)
-{
-    printf("=== t_data Debug Info ===\n");
-    printf("MLX pointer:         %p\n", (void *)data->mlx);
-    printf("Player pointer:      %p\n", (void *)data->player);
-    printf("Ray pointer:         %p\n", (void *)data->ray);
-    printf("Map pointer:         %p\n", (void *)data->map);
-    printf("Map char **m:        %p\n", (void *)data->m);
-    printf("Image:               %p\n", (void *)data->img);
-    printf("Texture North (tn):  %p\n", (void *)data->tn);
-    printf("Texture South (ts):  %p\n", (void *)data->ts);
-    printf("Texture East  (te):  %p\n", (void *)data->te);
-    printf("Texture West  (tw):  %p\n", (void *)data->tw);
 
-    printf("Sky color:           %d (0x%06X)\n", data->sky_color, data->sky_color);
-    printf("Floor color:         %d (0x%06X)\n", data->floor, data->floor);
-    printf("Checklist:           ");
-    for (int i = 0; i < 6; ++i)
-        printf("%d ", data->check_list[i]);
-    printf("\n");
-    printf("=========================\n");
-}
 static void check_config(char *row, t_data **data)
 {
 	int i;
@@ -118,7 +96,6 @@ static char **configuration(char **map, t_data **data)
 		count_non_empty_lines++;
 		check_config(map[i], data);
 	}
-	print_data(*data);
 	if ((* data)->tn == NULL || (* data)->ts == NULL || (* data)->tw == NULL || (* data)->te == NULL)
    		exit_fail("init: mlx failed to load png", *data);
 	check_for_dup(data);
@@ -163,17 +140,9 @@ t_data *map_parsing(char **map)
 	gc_track(data);
 	
 	data->m = configuration(map, &data);
-	for (int i = 0; data->m[i]; i++)
-	{
-		printf("%s\n", data->m[i]);
-	}
 	check_for_valid_chars(data->m);
 	find_player_position(data->m, &player_y, &player_x);
 	map_copy = copy_map(data->m);
-	for (int i = 0; data->m[i]; i++)
-	// {
-	// 	printf("%s\n", data->m[i]);
-	// }
 	flood_fill(map_copy, player_y, player_x);
 	
 	
