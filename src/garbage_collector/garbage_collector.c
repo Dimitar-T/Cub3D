@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_collector.c                                 :+:      :+:    :+:   */
+/*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:55:19 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/04/29 13:55:20 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:33:49 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	*gc_malloc(size_t size)
 	ptr = malloc(size);
 	if (!ptr)
 		return (NULL);
-		
 	new_node = malloc(sizeof(t_garbage_collector));
 	if (!new_node)
 	{

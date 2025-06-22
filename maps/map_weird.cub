@@ -1,9 +1,9 @@
-NO textures/scene2/1.png
-SO textures/scene2/2.png
+NO textures/scene5/11.png
+SO textures/scene5/22.png
 F 223,239,251
-C 223,239,251
-WE textures/scene2/3.png
-EA textures/scene2/4.png
+C 23,29,25
+WE textures/scene5/33.png
+EA textures/scene5/44.png
 
 111111111111111111111111111   
 1001001001001000001000001    

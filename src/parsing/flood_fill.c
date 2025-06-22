@@ -6,13 +6,13 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:02:30 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/22 18:23:03 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:24:15 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char **copy_map(char **original)
+char	**copy_map(char **original)
 {
 	int		i;
 	char	**copy;
@@ -28,7 +28,7 @@ char **copy_map(char **original)
 	while (original[++i])
 	{
 		copy[i] = ft_strdup(original[i]);
-		if(!copy[i])
+		if (!copy[i])
 			exit_fail("Cub3D: Error malloc failed!\n", NULL);
 		gc_track(copy[i]);
 	}
@@ -43,7 +43,7 @@ void	flood_fill(char **map, int y, int x)
 	if (!map[y] || x < 0 || x >= (int)ft_strlen(map[y]))
 		exit_fail("Cub3D: Error map is not closed (overflow)\n", NULL);
 	if (map[y][x] == '1' || map[y][x] == 'F')
-		return;
+		return ;
 	if (map[y][x] == ' ')
 		exit_fail("Cub3D: Map is not closed (touches space)\n", NULL);
 	map[y][x] = 'F';
@@ -53,10 +53,10 @@ void	flood_fill(char **map, int y, int x)
 	flood_fill(map, y, x - 1);
 }
 
-void find_player_position(char **map, int *out_y, int *out_x)
+void	find_player_position(char **map, int *out_y, int *out_x)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = -1;
 	while (map[++y])

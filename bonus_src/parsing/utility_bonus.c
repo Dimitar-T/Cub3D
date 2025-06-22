@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utility_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:24:48 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/22 17:00:35 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:02:30 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void exit_fail(char *message, t_data *game)
+void	exit_fail(char *message, t_data *game)
 {
 	if (message != NULL)
 		write(2, message, ft_strlen(message));
@@ -32,10 +32,23 @@ void exit_fail(char *message, t_data *game)
 			mlx_delete_texture(game->tw);
 		if (game->mlx)
 			mlx_terminate(game->mlx);
-	}	
+	}
 	gc_free_all();
-	if(message == NULL)
+	if (message == NULL)
 		exit(EXIT_SUCCESS);
 	else
 		exit(EXIT_FAILURE);
+}
+
+void	check_for_dup(t_data **data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 6)
+	{
+		if ((*data)->check_list[i] != 1)
+			exit_fail("Cub3D: Error duplicate or missing configuration!\n",
+				NULL);
+	}
 }
