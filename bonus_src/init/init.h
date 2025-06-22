@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:28:13 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 17:43:50 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:31:48 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,6 @@ typedef struct s_map
 	double			my;
 }					t_map;
 
-// typedef struct s_assets
-// {
-//     mlx_image_t     *s1;
-//     mlx_image_t     *s2;
-//     mlx_image_t     *s3;
-//     mlx_image_t     *s4;
-// }               t_assets;
-
-// typedef struct s_sprite
-// {
-//     int             id;
-//     t_assets        *ass;
-//     double          sx;
-//     double          sy;
-// }               t_sprite;
-
 typedef struct s_data
 {
 	mlx_t			*mlx;
@@ -93,9 +77,13 @@ typedef struct s_data
 	int				sky_color;
 	int				floor;
 	int				check_list[6];
-	// t_sprite        *sprites[50];
 }					t_data;
 
+// init
 t_data				*init_game(t_data *game);
+// init_helper
+void				player_pos(t_data *game, char **map, t_player *player,
+						int y);
+int					tile_size(int x, int y);
 
 #endif
