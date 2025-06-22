@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 15:25:53 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:28:50 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_texture_color(mlx_texture_t *tex, int x, int y)
 	agbr[0] = (color >> 24) & 0xFF;
 	agbr[1] = (color >> 16) & 0xFF;
 	agbr[2] = (color >> 8) & 0xFF;
-	agbr[3] = (color)&0xFF;
+	agbr[3] = (color) & 0xFF;
 	return (agbr[3] << 24 | agbr[2] << 16 | agbr[1] << 8 | agbr[0]);
 }
 
@@ -35,9 +35,9 @@ double	get_tx(t_data *game, t_ray *ray, mlx_texture_t *tex)
 
 	tx = 0;
 	if (ray->vert)
-		return (fmodf(ray->ry * (tex->width / game->tile), tex->width));
+		return (fmod(ray->ry * (tex->width / game->tile), tex->width));
 	else
-		tx = fmodf(ray->rx * (tex->width / game->tile), tex->width);
+		tx = fmod(ray->rx * (tex->width / game->tile), tex->width);
 	if (game->tss == 1)
 		tx = tex->width - tx;
 	return (tx);

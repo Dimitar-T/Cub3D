@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 13:59:00 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:28:01 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ void	perform_dda(t_ray *ray, int step_x, int step_y, t_data *game)
 		if (ray->mx < 0 || ray->my < 0 || ray->mx >= game->map->mx
 			|| ray->my >= game->map->my)
 			break ;
-		// if (game->map->m[ray->my][ray->mx] == '1')
-		// 	break ;
-		if (game->map->m[ray->my][ray->mx] == '1' || (game->map->m[ray->my][ray->mx] == 'D'
-			&& door_distance(ray->mx, ray->my, game->player, game) == 0))
-	{
-		if (game->map->m[ray->my][ray->mx] == 'D')
-			game->door = 1;
-		break ;
-	}
+		if (game->map->m[ray->my][ray->mx] == '1' || (game->map->m
+			[ray->my][ray->mx] == 'D' && door_d(ray->mx, ray->my, game) == 0))
+		{
+			if (game->map->m[ray->my][ray->mx] == 'D')
+				game->door = 1;
+			break ;
+		}
 	}
 }
 
