@@ -6,28 +6,35 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 17:26:39 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:09:44 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "moves.h"
 
-// sets offset to wall (depending on tile_size) to keep realistic distance
-// if angle is negative movement on y || x is negative
-void	set_offset(t_data *game, t_player *player, double angle_x,
-		double angle_y)
+int	is_wall(double x, double y, t_data *game, t_map *map)
 {
-	int	off;
+	double	offset;
 
-	off = game->tile / 3;
-	if (angle_x < 0)
-		player->xo = -off;
+	offset = game->tile * 0.2;
+	if ((int)((y + offset) / game->tile) > map->my || (int)((y - offset)
+			/ game->tile) < 0 || (int)((x + offset) / game->tile) > map->mx
+		|| (int)((x - offset) / game->tile) < 0)
+		return (1);
+	if (map->m[(int)((y + offset) / game->tile)][(int)((x + offset)
+			/ game->tile)] == '1')
+		return (1);
+	else if (map->m[(int)((y - offset) / game->tile)][(int)((x + offset)
+			/ game->tile)] == '1')
+		return (1);
+	else if (map->m[(int)((y + offset) / game->tile)][(int)((x - offset)
+			/ game->tile)] == '1')
+		return (1);
+	else if (map->m[(int)((y - offset) / game->tile)][(int)((x - offset)
+			/ game->tile)] == '1')
+		return (1);
 	else
-		player->xo = off;
-	if (angle_y < 0)
-		player->yo = -off;
-	else
-		player->yo = off;
+		return (0);
 }
 
 // same as horizontal movement, but adjustes angle to
@@ -50,10 +57,8 @@ void	move_player2(t_data *game, mlx_key_data_t data, t_player *player,
 	}
 	if (data.key == MLX_KEY_A || data.key == MLX_KEY_D)
 	{
-		set_offset(game, player, pdx, pdy);
-		if (map->m[(int)((player->py + player->yo + pdy * player->speed)
-				/ game->tile)][(int)((player->px + player->xo + pdx
-					* player->speed) / game->tile)] != '1')
+		if (!(is_wall((player->px + pdx * player->speed), (player->py + pdy
+						* player->speed), game, map)))
 		{
 			player->px += pdx * player->speed;
 			player->py += pdy * player->speed;
@@ -69,10 +74,8 @@ void	move_player(t_data *game, mlx_key_data_t data, t_player *player,
 {
 	if (data.key == MLX_KEY_W)
 	{
-		set_offset(game, player, player->pdx, player->pdy);
-		if (map->m[(int)((player->py + player->yo + player->pdy * player->speed)
-				/ game->tile)][(int)((player->px + player->xo + player->pdx
-					* player->speed) / game->tile)] != '1')
+		if (!is_wall((player->px + player->pdx * player->speed), (player->py
+					+ player->pdy * player->speed), game, map))
 		{
 			player->px += player->pdx * player->speed;
 			player->py += player->pdy * player->speed;
@@ -80,10 +83,8 @@ void	move_player(t_data *game, mlx_key_data_t data, t_player *player,
 	}
 	else if (data.key == MLX_KEY_S)
 	{
-		set_offset(game, player, player->pdx, player->pdy);
-		if (map->m[(int)((player->py - player->yo - player->pdy * player->speed)
-				/ game->tile)][(int)((player->px - player->xo - player->pdx
-					* player->speed) / game->tile)] != '1')
+		if (!(is_wall((player->px - player->pdx * player->speed), (player->py
+						- player->pdy * player->speed), game, map)))
 		{
 			player->px -= player->pdx * player->speed;
 			player->py -= player->pdy * player->speed;
