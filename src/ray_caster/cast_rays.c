@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 16:36:53 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 19:21:20 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 
 	x = 0;
 	start_angle = player->pa - FOV / 2;
+	refresh_image(game);
 	while (x < WIN_WIDTH)
 	{
 		ray->ra = start_angle + (FOV * x / WIN_WIDTH);

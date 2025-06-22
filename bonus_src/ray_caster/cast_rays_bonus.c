@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 16:44:12 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 19:20:23 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray)
 
 	x = 0;
 	start_angle = player->pa - FOV / 2;
+	refresh_image(game);
 	while (x < WIN_WIDTH)
 	{
 		ray->ra = start_angle + (FOV * x / WIN_WIDTH);

@@ -6,11 +6,22 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:20:30 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 15:15:47 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 19:21:39 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
+
+void	refresh_image(t_data *game)
+{
+	if (game->img)
+		mlx_delete_image(game->mlx, game->img);
+	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->img)
+		exit_fail("Cub3D: Failed to create new image\n", game);
+	if (mlx_image_to_window(game->mlx, game->img, 0, 0) == -1)
+		exit_fail("Cub3D: Failed to put image to window\n", game);
+}
 
 // draws ceiling to top of screen, wall to middle bottom, rest floor
 void	draw_scene(int start_close, int end_close, t_data *game, int x)
