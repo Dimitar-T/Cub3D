@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 16:49:54 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:05:14 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_data	*init_game(t_data *game)
 {
 	game->map = init_map(game->m);
 	game->tile = tile_size(game->map->mx, game->map->my);
-	// printf("ts %d\n", (int)game->tile);
 	game->player = init_player(game, game->map);
 	game->ray = init_rays(game->player);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Carto", true);
