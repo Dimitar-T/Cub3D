@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:25:20 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 17:14:49 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:17:16 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	mm_draw_map(mlx_image_t *img, char **map)
 		{
 			if (map[(int)(y / 10)][(int)(x / 10)] == '1')
 				mlx_put_pixel(img, x, y, 0x404040FF);
-			else
+			else if (map[(int)(y / 10)][(int)(x / 10)] != ' ')
 				mlx_put_pixel(img, x, y, 0x000000FF);
 			x++;
 		}
