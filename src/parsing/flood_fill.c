@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flood_fill_bonus.c                                 :+:      :+:    :+:   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:02:30 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/22 15:14:56 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:23:03 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char **copy_map(char **original)
 
 void	flood_fill(char **map, int y, int x)
 {
+	if (y < 0 || map[y] == NULL)
+		exit_fail("Cub3D: Error map is not closed (overflow)\n", NULL);
 	if (!map[y] || x < 0 || x >= (int)ft_strlen(map[y]))
 		exit_fail("Cub3D: Error map is not closed (overflow)\n", NULL);
 	if (map[y][x] == '1' || map[y][x] == 'F')
