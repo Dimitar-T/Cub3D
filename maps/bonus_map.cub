@@ -1,10 +1,10 @@
-F 25,25,29
-C 23,29,21
+F 125,25,29
+C 41,29,21
 
-NO textures/11.png
-SO textures/22.png
-WE textures/33.png
-EA textures/44.png
+NO textures/scene1/1.png
+SO textures/scene1/2.png
+WE textures/scene1/3.png
+EA textures/scene1/4.png
 
 1111111111111111111
 10W1001001001000001
