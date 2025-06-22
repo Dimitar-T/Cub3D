@@ -1,6 +1,6 @@
 NAME	= cub3D
 BONUS_NAME = cub3D_bonus
-CFLAGS	= -Wextra -Wall -Wunreachable-code -O3 -g
+CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -O3 -g
 LIBMLX	= ./MLX42
 LIBFT = ./libft
 
@@ -69,6 +69,8 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
+	@rm -f $(NAME)
+	@rm -f $(BONUS_NAME)
 
 re: fclean all
 
