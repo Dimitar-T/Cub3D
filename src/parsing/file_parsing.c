@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_parsing.c                                     :+:      :+:    :+:   */
+/*   file_parsing_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:56:45 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/10 14:05:01 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:05:37 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	get_fd(char *str)
 	
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		exit_fail("Cub3D: Error opening the file check if the file exists and if the permissions are set correctlly");
+		exit_fail("Cub3D: Error opening the file check if the file exists and if the permissions are set correctlly", NULL);
 	read_bytes = read(fd, test_buffer, 0);
     if (read_bytes == -1 && errno == EISDIR)
     {
         close(fd);
-    	exit_fail("Cub3D: Error the path that is given goes to a folder and not to a file, you sneaky little ***** "); // It’s a directory
+    	exit_fail("Cub3D: Error the path that is given goes to a folder and not to a file, you sneaky little ***** ", NULL); // It’s a directory
     } 
 	return (fd);
 }
@@ -41,10 +41,10 @@ static void file_name_validation(char *argv)
 		{
 			if (ft_strcmp(&argv[i + 1], "cub") == 0)
 				break;
-			exit_fail("CuB3D: Error please provide a *.cub file!");
+			exit_fail("CuB3D: Error please provide a *.cub file!", NULL);
 		} 
 		else if(argv[i + 1] == '\0')
-			exit_fail("CuB3D: Error please provide a *.cub file!");
+			exit_fail("CuB3D: Error please provide a *.cub file!", NULL);
 	}
 }
 
@@ -76,7 +76,7 @@ char	**file_parsing(char **argv)
 	line_count = count_lines(argv[1]);
 	map  = gc_malloc((sizeof(char *) * (line_count + 1)));
 	if (map == NULL)
-		exit_fail("Cub3D: Memory allocation error");
+		exit_fail("Cub3D: Memory allocation error", NULL);
 	i = -1;
 	fd = get_fd(argv[1]);
 	while ((map[++i] = get_next_line(fd)))
@@ -84,7 +84,7 @@ char	**file_parsing(char **argv)
 		gc_track(map[i]);
 		if(map[i] == NULL && i != line_count)
 		{
-			exit_fail("Cub3D: Memory allocation error");
+			exit_fail("Cub3D: Memory allocation error", NULL);
 		}
 	}
 	return(close(fd), map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/19 15:35:52 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:40:09 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ static void strip_trailing_newlines(char **map)
 		i++;
 	}
 }
-
+// void	check_leaks(void)
+// {
+// 	write(1, "Checking for leaks...\n", 22);
+// 	system("leaks cub3D");  // use the name of your binary: cub3D or cub3D_bonus
+// }
 int main(int argc, char **argv)
 {
 	char **map;
 	t_data *game;
 	
+	// atexit(check_leaks);
 	ft_arguments_checker(argc);
 	map = file_parsing(argv);
 	strip_trailing_newlines(map);
@@ -56,6 +61,6 @@ int main(int argc, char **argv)
     mlx_key_hook(game->mlx, key_callback, game);
 	mlx_loop_hook(game->mlx, update_keys, game);
 	mlx_loop(game->mlx);
-    gc_free_all();
+    exit_fail(NULL, game);
     return(0);
 }

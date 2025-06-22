@@ -6,15 +6,35 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:24:48 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/09 14:27:39 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:06:22 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	exit_fail(char *message)
+void exit_fail(char *message, t_data *game)
 {
-	write(2, message, ft_strlen(message));
+	if (message != NULL)
+		write(2, message, ft_strlen(message));
+	if (game != NULL)
+	{
+		// printf("hello'\n");
+		if (game->img)
+			mlx_delete_image(game->mlx, game->img);
+		if (game->tn)
+			mlx_delete_texture(game->tn);
+		if (game->ts)
+			mlx_delete_texture(game->ts);
+		if (game->te)
+			mlx_delete_texture(game->te);
+		if (game->tw)
+			mlx_delete_texture(game->tw);
+		if (game->mlx)
+			mlx_terminate(game->mlx);
+	}	
 	gc_free_all();
-	exit(EXIT_FAILURE);
+	if(message == NULL)
+		exit(EXIT_SUCCESS);
+	else
+		exit(EXIT_FAILURE);
 }

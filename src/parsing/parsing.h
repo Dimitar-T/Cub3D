@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/18 15:15:40 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:01:08 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**copy_map(char **original);
 void	find_player_position(char **map, int *out_y, int *out_x);
 void    validate_texture_path(char *path, char *key, t_data **data);
 int 	get_fd(char *str);
-void	exit_fail(char *message);
+void	exit_fail(char *message, t_data *game);
 t_data	*map_parsing(char **map);
 void 	rgb_range_checker(char *row, int f_or_c, t_data **data);
 char	**file_parsing(char **argv);

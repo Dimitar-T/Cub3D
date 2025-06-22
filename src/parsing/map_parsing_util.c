@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_util.c                                 :+:      :+:    :+:   */
+/*   map_parsing_util_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/20 16:34:43 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 12:48:49 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+static void set_rgb(int f_or_c, t_data **data, int value, char *split)
+{
+	if (f_or_c == 1)
+		(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split))) + value;
+	if (f_or_c == 0)
+		(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split))) + value;
+}
 
 void rgb_range_checker(char *row, int f_or_c, t_data **data)
 {
@@ -22,24 +30,22 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 	while (*row == 'F' || *row == 'C' || *row == ' ')
 		row++;
 	split = ft_split(row, ',');
-	if (!split || split[0] == NULL || split[1] == NULL || split[2] == NULL || split[3] != NULL)
-		exit_fail("Cub3D: RGB must be 3 numbers separated by 2 commas\n");
+	gc_track(split);
 	i = -1;
 	while (split[++i])
 	{
+		gc_track(split[i]);
 		j = -1;	
 		while (split[i][++j])
 			if ((ft_isdigit(split[i][j]) == 0) && split[i][j] != '\n') 
-				exit_fail("Cub3D: RGB values must be digits only\n");
+				exit_fail("Cub3D: RGB values must be digits only\n", *data);
 		value = ft_atoi(split[i]);
 		if (value < 0 || value > 255)
-			exit_fail("Cub3D: RGB values must be between 0 and 255\n");
-		if (f_or_c == 1)
-			(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split[i]))) + value;
-		if (f_or_c == 0)
-			(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split[i]))) + value;
-		// printf("f1 %d s1 %d\n", (*data)->floor, (*data)->sky_color);
+			exit_fail("Cub3D: RGB values must be between 0 and 255\n", *data);
+		set_rgb(f_or_c, data, value, split[i]);
 	}
+	if (!split || split[0] == NULL || split[1] == NULL || split[2] == NULL || split[3] != NULL)
+		exit_fail("Cub3D: RGB must be 3 numbers separated by 2 commas\n", *data);
 }
 
 /// @brief  add other allowed formats as long as the mlx supports them talk to joanna 
@@ -64,11 +70,11 @@ static int valid_texture_extention(char *filename)
 void validate_texture_path(char *path, char *key, t_data **data)
 {
 	if(valid_texture_extention(path) == false)
-		exit_fail("Cub3D: Error texture is not in a valid format\n");
+		exit_fail("Cub3D: Error texture is not in a valid format\n", *data);
 	while (*path == ' ')
 		path++;
 	if (!path || ft_strlen(path) == 0)
-		exit_fail("Cub3D: Empty texture path\n");
+		exit_fail("Cub3D: Empty texture path\n", *data);
 	// printf("debug %s\n", path);
 	get_fd(path);
 	if(key[0] == 'E') //EWSN
@@ -79,6 +85,5 @@ void validate_texture_path(char *path, char *key, t_data **data)
 		(*data)->ts = mlx_load_png(path);
 	else if(key[0] == 'N')
     	(*data)->tn = mlx_load_png(path);
-    // if ((* data)->tn == NULL || (* data)->ts == NULL || (* data)->tw == NULL || (* data)->te == NULL)
-    // exit_fail("init: mlx failed to load png");
+  
 }

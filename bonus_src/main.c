@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/20 18:46:01 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:26:23 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ static void print_data(t_data *data)
     printf("=========================\n");
 }
 
+// void	check_leaks(void)
+// {
+// 	write(1, "Checking for leaks...\n", 22);
+// 	system("leaks cub3D");  // use the name of your binary: cub3D or cub3D_bonus
+// }
+
 int main(int argc, char **argv)
 {
 	char **map;
 	t_data *game;
 	
+	// atexit(check_leaks);
 	ft_arguments_checker(argc);
 	map = file_parsing(argv);
 	strip_trailing_newlines(map);
@@ -83,6 +90,6 @@ int main(int argc, char **argv)
     mlx_key_hook(game->mlx, key_callback, game);
 	mlx_loop_hook(game->mlx, update_keys, game);
 	mlx_loop(game->mlx);
-    gc_free_all();
+    exit_fail(NULL, game);
     return(0);
 }
