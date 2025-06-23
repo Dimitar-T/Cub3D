@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:28:13 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 15:17:21 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:09:26 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ typedef struct s_data
 	double			tile;
 	double			tss;
 	int				door;
-	int				sky_color;
-	int				floor;
+	uint32_t		sky_color;
+	uint32_t		floor;
 	int				check_list[6];
 }					t_data;
 

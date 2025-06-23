@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays2_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:20:30 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 19:20:54 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:51:41 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	draw_scene(int start_close, int end_close, t_data *game, int x)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		mlx_put_pixel(game->img, x, y, game->floor);
+		uint32_t red = (255 << 24) | (255 << 16) | (0 << 8) | 0;
+		mlx_put_pixel(game->img, x, y, red);
 		y++;
 	}
 	game->tss = 0;

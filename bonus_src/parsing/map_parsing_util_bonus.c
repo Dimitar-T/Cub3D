@@ -3,30 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_util_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/22 18:00:28 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:46:54 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void	set_rgb(int f_or_c, t_data **data, int value, char *split)
+/// @brief the + 255 is for A(saturation) in RGBA 
+/// @param f_or_c floor or ceiling
+/// @param data data
+/// @param index which digit is getting passed
+/// @param value the digit
+static void set_rgb(int f_or_c, t_data **data, int index, int value)
 {
 	if (f_or_c == 1)
-		(*data)->floor = ((*data)->floor * pow(10, ft_strlen(split))) + value;
-	if (f_or_c == 0)
-		(*data)->sky_color = ((*data)->sky_color * pow(10, ft_strlen(split)))
-			+ value;
+	{
+		if (index == 0)
+			(*data)->floor += (value * (int)pow(2, 24)) + 255;
+		else if (index == 1)
+			(*data)->floor += (value * (int)pow(2, 16));
+		else if (index == 2)
+			(*data)->floor += (value * (int)pow(2, 8));
+	}
+	else if (f_or_c == 0)
+	{
+		if (index == 0)
+			(*data)->sky_color += (value * (int)pow(2, 24)) + (255);
+		else if (index == 1)
+			(*data)->sky_color += (value * (int)pow(2, 16));
+		else if (index == 2)
+			(*data)->sky_color += (value * (int)pow(2, 8));
+	}
 }
 
-void	rgb_range_checker(char *row, int f_or_c, t_data **data)
+void rgb_range_checker(char *row, int f_or_c, t_data **data)
 {
-	char	**split;
-	int		i;
-	int		value;
-	int		j;
+	char **split;
+	int i;
+	int value;
+	int j;
 
 	while (*row == 'F' || *row == 'C' || *row == ' ')
 		row++;
@@ -42,17 +60,16 @@ void	rgb_range_checker(char *row, int f_or_c, t_data **data)
 		value = ft_atoi(split[i]);
 		if (value < 0 || value > 255)
 			exit_fail("Cub3D: RGB values must be between 0 and 255\n", *data);
-		set_rgb(f_or_c, data, value, split[i]);
+		set_rgb(f_or_c, data, i, value);
 	}
-	if (!split || split[0] == NULL || split[1] == NULL || split[2] == NULL
-		|| split[3] != NULL)
+	if (!split || split[0] == NULL || split[1] == NULL || split[2] == NULL || split[3] != NULL)
 		exit_fail("Cub3D: RGB must be 3 numbers separated by 2 commas\n",
-			*data);
+				  *data);
 }
 
-static int	valid_texture_extention(char *filename)
+static int valid_texture_extention(char *filename)
 {
-	char	*extention;
+	char *extention;
 
 	extention = ft_strrchr(filename, '.');
 	if (!extention)
@@ -65,7 +82,7 @@ static int	valid_texture_extention(char *filename)
 		return (false);
 }
 
-void	validate_texture_path(char *path, char *key, t_data **data)
+void validate_texture_path(char *path, char *key, t_data **data)
 {
 	if (valid_texture_extention(path) == false)
 		exit_fail("Cub3D: Error texture is not in a valid format\n", *data);
