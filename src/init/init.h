@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:28:13 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/23 18:49:01 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:11:59 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_data
 	mlx_texture_t	*te;
 	mlx_texture_t	*tw;
 	double			tile;
-	double			tss;
+	double			tx_mir;
 	uint32_t		sky_color;
 	uint32_t		floor;
 	int				check_list[6];

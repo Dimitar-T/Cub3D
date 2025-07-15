@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:31:41 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 16:28:50 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:55:50 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double	get_tx(t_data *game, t_ray *ray, mlx_texture_t *tex)
 		return (fmod(ray->ry * (tex->width / game->tile), tex->width));
 	else
 		tx = fmod(ray->rx * (tex->width / game->tile), tex->width);
-	if (game->tss == 1)
+	if (game->tx_mir == 1)
 		tx = tex->width - tx;
 	return (tx);
 }
@@ -73,7 +73,7 @@ mlx_texture_t	*choose_tex(t_data *game)
 			if (game->ray->rdy < 0)
 				return (game->tn);
 			else
-				return (game->tss = 1, game->ts);
+				return (game->tx_mir = 1, game->ts);
 		}
 	}
 	else

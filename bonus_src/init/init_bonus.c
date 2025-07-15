@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 18:05:14 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:55:33 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_data	*init_game(t_data *game)
 	game->player = init_player(game, game->map);
 	game->ray = init_rays(game->player);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Carto", true);
-	game->tss = 0;
+	game->tx_mir = 0;
 	if (game->mlx == NULL)
 		exit_fail("init: allocation fail1\n", game);
 	mlx_set_window_limit(game->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_WIDTH,

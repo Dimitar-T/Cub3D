@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 19:21:59 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:13:10 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,32 @@ t_player	*init_player(t_data *game, t_map *map)
 	return (player);
 }
 
-t_map	*init_map(char **m)
+t_map   *init_map(char **m)
 {
-	t_map	*map;
-	int		y;
+    t_map   *map;
+    int     y;
+    int     a;
+    int     b;
 
-	map = gc_malloc(sizeof(t_map));
-	if (!map)
-		exit_fail("init: allocation fail\n", NULL);
-	y = 0;
-	map->m = m;
-	map->mx = ft_strlen(map->m[0]);
-	while (map->m[y] != NULL)
-		y++;
-	map->my = y;
+    map = gc_malloc(sizeof(t_map));
+    if (!map)
+        exit_fail("init: allocation fail\n", NULL);
+    y = 0;
+    a = 0;
+    b = 0;
+    map->m = m;
+    if (map->m[0])
+    a = ft_strlen(map->m[0]);
+    while (map->m[y] != NULL)
+    {
+        b = ft_strlen(map->m[y]);
+        if (b > a)
+            a = b;
+        y++;
+    }
+    map->mx = a;
+    map->my = y;
+	printf("mx %f my %f\n", map->mx, map->my);
 	return (map);
 }
 
@@ -80,7 +92,7 @@ t_data	*init_game(t_data *game)
 	game->player = init_player(game, game->map);
 	game->ray = init_rays(game->player);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Carto", true);
-	game->tss = 0;
+	game->tx_mir = 0;
 	if (game->mlx == NULL)
 		exit_fail("init: allocation fail1\n", game);
 	mlx_set_window_limit(game->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_WIDTH,

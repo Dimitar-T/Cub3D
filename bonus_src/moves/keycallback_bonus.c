@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 11:14:50 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 13:59:37 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:47:03 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	update_keys(void *param)
 	p = game->player;
 	update_mouse(&game, &p);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-		move_player(game, (mlx_key_data_t){.key = MLX_KEY_W}, p, game->map);
+		move_player_ws(game, (mlx_key_data_t){.key = MLX_KEY_W}, p, game->map);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-		move_player(game, (mlx_key_data_t){.key = MLX_KEY_S}, p, game->map);
+		move_player_ws(game, (mlx_key_data_t){.key = MLX_KEY_S}, p, game->map);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move_player(game, (mlx_key_data_t){.key = MLX_KEY_A}, p, game->map);
+		move_player_ad(game, (mlx_key_data_t){.key = MLX_KEY_A}, p, game->map);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		move_player(game, (mlx_key_data_t){.key = MLX_KEY_D}, p, game->map);
+		move_player_ad(game, (mlx_key_data_t){.key = MLX_KEY_D}, p, game->map);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		change_direction((mlx_key_data_t){.key = MLX_KEY_LEFT}, p);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))

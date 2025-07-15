@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:18:12 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 18:06:43 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:46:36 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,100 +14,79 @@
 
 int	is_wall(double x, double y, t_data *game, t_map *map)
 {
-	double	offset;
+	int	x_inc;
+	int	y_inc;
+	int	x_dec;
+	int	y_dec;
 
-	offset = game->tile * 0.2;
-	if ((int)((y + offset) / game->tile) > map->my || (int)((y - offset)
-			/ game->tile) < 0 || (int)((x + offset) / game->tile) > map->mx
-		|| (int)((x - offset) / game->tile) < 0)
+	x_inc = (int)((x + (game->tile * 0.2)) / game->tile);
+	y_inc = (int)((y + (game->tile * 0.2)) / game->tile);
+	x_dec = (int)((x - (game->tile * 0.2)) / game->tile);
+	y_dec = (int)((y - (game->tile * 0.2)) / game->tile);
+	if (y_inc > map->my || y_dec < 0 || x_inc > map->mx || x_dec < 0)
 		return (1);
-	if (map->m[(int)((y + offset) / game->tile)][(int)((x + offset)
-			/ game->tile)] == '1')
+	if (map->m[y_inc][x_inc] == '1')
 		return (1);
-	else if (map->m[(int)((y - offset) / game->tile)][(int)((x + offset)
-			/ game->tile)] == '1')
+	else if (map->m[y_dec][x_inc] == '1')
 		return (1);
-	else if (map->m[(int)((y + offset) / game->tile)][(int)((x - offset)
-			/ game->tile)] == '1')
+	else if (map->m[y_inc][x_dec] == '1')
 		return (1);
-	else if (map->m[(int)((y - offset) / game->tile)][(int)((x - offset)
-			/ game->tile)] == '1')
+	else if (map->m[y_dec][x_dec] == '1')
 		return (1);
 	else
 		return (0);
 }
 
-// same as horizontal movement, but adjustes angle to
-// + a quarter circle (90°) for right and - quarter circle for left
-void	move_player2(t_data *game, mlx_key_data_t data, t_player *player,
+void	move_player_ad(t_data *game, mlx_key_data_t data, t_player *p,
 		t_map *map)
 {
-	double	pdx;
-	double	pdy;
+	double	new_px;
+	double	new_py;
 
 	if (data.key == MLX_KEY_A)
 	{
-		pdx = cos(player->pa - M_PI / 2);
-		pdy = sin(player->pa - M_PI / 2);
-	}
-	else if (data.key == MLX_KEY_D)
-	{
-		pdx = cos(player->pa + M_PI / 2);
-		pdy = sin(player->pa + M_PI / 2);
-	}
-	if (data.key == MLX_KEY_A || data.key == MLX_KEY_D)
-	{
-		if (!(is_wall((player->px + pdx * player->speed), (player->py + pdy
-						* player->speed), game, map)))
-		{
-			player->px += pdx * player->speed;
-			player->py += pdy * player->speed;
-		}
-	}
-}
-
-// checks if the position p is moving towards is open space
-// (uses current position, adds 20 px for realistic wall-distance and moves
-// speed steps on the y direction + x direction)
-void	move_player(t_data *game, mlx_key_data_t data, t_player *player,
-		t_map *map)
-{
-	if (data.key == MLX_KEY_W)
-	{
-		if (!is_wall((player->px + player->pdx * player->speed), (player->py
-					+ player->pdy * player->speed), game, map))
-		{
-			player->px += player->pdx * player->speed;
-			player->py += player->pdy * player->speed;
-		}
-	}
-	else if (data.key == MLX_KEY_S)
-	{
-		if (!(is_wall((player->px - player->pdx * player->speed), (player->py
-						- player->pdy * player->speed), game, map)))
-		{
-			player->px -= player->pdx * player->speed;
-			player->py -= player->pdy * player->speed;
-		}
+		new_px = p->px + cos(p->pa - M_PI / 2) * p->speed;
+		new_py = p->py + sin(p->pa - M_PI / 2) * p->speed;
 	}
 	else
-		move_player2(game, data, player, map);
+	{
+		new_px = p->px + cos(p->pa + M_PI / 2) * p->speed;
+		new_py = p->py + sin(p->pa + M_PI / 2) * p->speed;
+	}
+	if (!is_wall(p->px, new_py, game, map))
+		p->py = new_py;
+	if (!is_wall(new_px, p->py, game, map))
+		p->px = new_px;
 }
 
-// changes player angle around 12°
-// and changes pdx/pdy (x & y direction of the current angle) accordingly
+void	move_player_ws(t_data *game, mlx_key_data_t data, t_player *p,
+		t_map *map)
+{
+	double	new_px;
+	double	new_py;
+
+	if (data.key == MLX_KEY_W)
+	{
+		new_px = p->px + p->pdx * p->speed;
+		new_py = p->py + p->pdy * p->speed;
+	}
+	else
+	{
+		new_px = p->px - p->pdx * p->speed;
+		new_py = p->py - p->pdy * p->speed;
+	}
+	if (!is_wall(p->px, new_py, game, map))
+		p->py = new_py;
+	if (!is_wall(new_px, p->py, game, map))
+		p->px = new_px;
+}
+
 void	change_direction(mlx_key_data_t data, t_player *player)
 {
 	if (data.key == MLX_KEY_RIGHT)
-	{
 		player->pa += 0.1;
-		player->pdx = cos(player->pa);
-		player->pdy = sin(player->pa);
-	}
 	else if (data.key == MLX_KEY_LEFT)
-	{
 		player->pa -= 0.1;
-		player->pdx = cos(player->pa);
-		player->pdy = sin(player->pa);
-	}
+	player->pdx = cos(player->pa);
+	player->pdy = sin(player->pa);
 }

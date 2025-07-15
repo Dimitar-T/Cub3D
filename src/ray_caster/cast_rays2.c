@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:20:30 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/22 19:21:39 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:55:59 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	draw_scene(int start_close, int end_close, t_data *game, int x)
 		mlx_put_pixel(game->img, x, y, game->floor);
 		y++;
 	}
-	game->tss = 0;
+	game->tx_mir = 0;
 }
 
 // calculates height of walls depending on distance to player and tile_size
