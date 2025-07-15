@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/07/15 18:13:10 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:33:50 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,31 @@ t_player	*init_player(t_data *game, t_map *map)
 	return (player);
 }
 
-t_map   *init_map(char **m)
+t_map	*init_map(char **m)
 {
-    t_map   *map;
-    int     y;
-    int     a;
-    int     b;
+	t_map	*map;
+	int		y;
+	int		a;
+	int		b;
 
-    map = gc_malloc(sizeof(t_map));
-    if (!map)
-        exit_fail("init: allocation fail\n", NULL);
-    y = 0;
-    a = 0;
-    b = 0;
-    map->m = m;
-    if (map->m[0])
-    a = ft_strlen(map->m[0]);
-    while (map->m[y] != NULL)
-    {
-        b = ft_strlen(map->m[y]);
-        if (b > a)
-            a = b;
-        y++;
-    }
-    map->mx = a;
-    map->my = y;
-	printf("mx %f my %f\n", map->mx, map->my);
+	map = gc_malloc(sizeof(t_map));
+	if (!map)
+		exit_fail("init: allocation fail\n", NULL);
+	y = 0;
+	a = 0;
+	b = 0;
+	map->m = m;
+	if (map->m[0])
+		a = ft_strlen(map->m[0]);
+	while (map->m[y] != NULL)
+	{
+		b = ft_strlen(map->m[y]);
+		if (b > a)
+			a = b;
+		y++;
+	}
+	map->mx = a;
+	map->my = y;
 	return (map);
 }
 

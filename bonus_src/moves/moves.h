@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:31:01 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/07/15 16:47:30 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:36:32 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	change_direction(mlx_key_data_t data, t_player *player);
 void	move_player_ws(t_data *game, mlx_key_data_t data, t_player *player,
 			t_map *map);
 void	move_player_ad(t_data *game, mlx_key_data_t data, t_player *player,
-				t_map *map);
+			t_map *map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:20:30 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/07/15 17:55:22 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:37:14 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	refresh_image(t_data *game)
 // draws ceiling to top of screen, wall to middle bottom, rest floor
 void	draw_scene(int start_close, int end_close, t_data *game, int x)
 {
-	int	y;
+	int			y;
+	uint32_t	red;
 
 	y = 0;
 	while (y < start_close)
@@ -42,7 +43,7 @@ void	draw_scene(int start_close, int end_close, t_data *game, int x)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		uint32_t red = (255 << 24) | (255 << 16) | (0 << 8) | 0;
+		red = (255 << 24) | (255 << 16) | (0 << 8) | 0;
 		mlx_put_pixel(game->img, x, y, red);
 		y++;
 	}
