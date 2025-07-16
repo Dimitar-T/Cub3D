@@ -6,16 +6,11 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:25:20 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/06/20 18:18:54 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:38:31 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray_caster.h"
-
-// #define MINIMAP_WIDTH 200
-// #define MINIMAP_HEIGHT 150
-// #define MINIMAP_OFFSET_X 10
-// #define MINIMAP_OFFSET_Y 10
 
 // draws player in red
 void	mm_draw_player(t_data *game)

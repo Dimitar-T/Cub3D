@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:16:43 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/07/15 17:52:01 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:37:52 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,4 @@ void	cast_rays(t_data *game, t_player *player, t_ray *ray, t_map *map)
 		calc_walls(x, game, ray, player);
 		x++;
 	}
-	minimap(game);
 }

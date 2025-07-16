@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/07/16 12:32:17 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:37:44 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	init_game(game);
 	cast_rays(game, game->player, game->ray, game->map);
-	minimap(game);
 	mlx_key_hook(game->mlx, key_callback, game);
 	mlx_loop_hook(game->mlx, update_keys, game);
 	mlx_loop(game->mlx);
