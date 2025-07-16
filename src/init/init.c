@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/07/16 12:30:10 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:41:28 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_player	*init_player(t_data *game, t_map *map)
 	player_pos(game, map->m, player, y);
 	player->pdx = cos(player->pa);
 	player->pdy = sin(player->pa);
-	player->speed = 0.4;
+	player->speed = 1.0;
 	player->yo = 0;
 	player->xo = 0;
 	return (player);

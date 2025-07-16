@@ -6,7 +6,7 @@
 /*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:20:30 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/07/15 18:37:14 by jwardeng         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:45:54 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	refresh_image(t_data *game)
 void	draw_scene(int start_close, int end_close, t_data *game, int x)
 {
 	int			y;
-	uint32_t	red;
 
 	y = 0;
 	while (y < start_close)
@@ -43,8 +42,7 @@ void	draw_scene(int start_close, int end_close, t_data *game, int x)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		red = (255 << 24) | (255 << 16) | (0 << 8) | 0;
-		mlx_put_pixel(game->img, x, y, red);
+		mlx_put_pixel(game->img, x, y, game->floor);
 		y++;
 	}
 	game->tx_mir = 0;
