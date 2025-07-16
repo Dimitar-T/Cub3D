@@ -1,11 +1,11 @@
 NAME	= cub3D
 BONUS_NAME = cub3D_bonus
-CFLAGS	= -Wextra -Wall  -Wunreachable-code -O3 -g
+CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -O3 -g
 LIBMLX	= ./MLX42
 LIBFT = ./libft
 
 HEADERS = -I ./include -I $(LIBMLX)/include -I $(LIBMLX) $(INCLUDES)
-LDFLAGS = -L/opt/homebrew/lib
+LDFLAGS = -L/usr/local/lib
 INCLUDES = -I/opt/homebrew/include
 LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm $(LIBFT)/libft.a $(LDFLAGS)
 
@@ -17,7 +17,7 @@ BNS_OBJ_DIR = bonus_obj
 SRC	= 	$(SRC_DIR)/main.c $(SRC_DIR)/parsing/file_parsing.c $(SRC_DIR)/parsing/utility.c \
 		$(SRC_DIR)/garbage_collector/garbage_collector.c $(SRC_DIR)/parsing/map_parsing.c \
 		$(SRC_DIR)/parsing/map_parsing_util.c $(SRC_DIR)/init/init.c $(SRC_DIR)/moves/move_player.c \
-		$(SRC_DIR)/ray_caster/cast_rays.c $(SRC_DIR)/ray_caster/minimap.c $(SRC_DIR)/ray_caster/minimap_rays.c \
+		$(SRC_DIR)/ray_caster/cast_rays.c \
 		$(SRC_DIR)/ray_caster/textures.c  $(SRC_DIR)/parsing/flood_fill.c $(SRC_DIR)/ray_caster/cast_rays2.c \
 		$(SRC_DIR)/moves/keycallback.c $(SRC_DIR)/init/init_helper.c $(SRC_DIR)/parsing/ft_split_plus.c
 
