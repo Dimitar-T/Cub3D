@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:27:17 by jwardeng          #+#    #+#             */
-/*   Updated: 2025/07/16 12:30:10 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:53:47 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_player	*init_player(t_data *game, t_map *map)
 	y = 0;
 	player = gc_malloc(sizeof(t_player));
 	if (!player)
-		exit_fail("init: allocation fail\n", NULL);
+		exit_fail("init: allocation fail\n", game);
 	player_pos(game, map->m, player, y);
 	player->pdx = cos(player->pa);
 	player->pdy = sin(player->pa);
@@ -31,7 +31,7 @@ t_player	*init_player(t_data *game, t_map *map)
 	return (player);
 }
 
-t_map	*init_map(char **m)
+t_map	*init_map(char **m, t_data *game)
 {
 	t_map	*map;
 	int		y;
@@ -40,7 +40,7 @@ t_map	*init_map(char **m)
 
 	map = gc_malloc(sizeof(t_map));
 	if (!map)
-		exit_fail("init: allocation fail\n", NULL);
+		exit_fail("init: allocation fail\n", game);
 	y = 0;
 	a = 0;
 	b = 0;
@@ -59,13 +59,13 @@ t_map	*init_map(char **m)
 	return (map);
 }
 
-t_ray	*init_rays(t_player *player)
+t_ray	*init_rays(t_player *player, t_data *game)
 {
 	t_ray	*ray;
 
 	ray = gc_malloc(sizeof(t_ray));
 	if (!ray)
-		exit_fail("init: allocation fail\n", NULL);
+		exit_fail("init: allocation fail\n", game);
 	ray->rx = 0;
 	ray->ry = 0;
 	ray->ra = player->pa;
@@ -86,10 +86,10 @@ t_ray	*init_rays(t_player *player)
 
 t_data	*init_game(t_data *game)
 {
-	game->map = init_map(game->m);
+	game->map = init_map(game->m, game);
 	game->tile = tile_size(game->map->mx, game->map->my);
 	game->player = init_player(game, game->map);
-	game->ray = init_rays(game->player);
+	game->ray = init_rays(game->player, game);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Carto", true);
 	game->tx_mir = 0;
 	if (game->mlx == NULL)

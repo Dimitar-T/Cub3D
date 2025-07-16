@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/26 21:22:26 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 14:07:42 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	validate_texture_path(char *path, char *key, t_data **data)
 	if (trimmed_path == NULL)
 		exit_fail("Cub3D: Error malloc failed!\n", *data);
 	gc_track(trimmed_path);
-	printf("debug: %s\n", trimmed_path);
 	if (valid_texture_extention(trimmed_path) == false)
 		exit_fail("Cub3D: Error texture is not in a valid format\n", *data);
 	get_fd(trimmed_path);

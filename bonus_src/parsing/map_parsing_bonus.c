@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/26 21:23:57 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 14:06:12 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_data	*map_parsing(char **map)
 	data->m = configuration(map, &data);
 	check_for_valid_chars(data->m, data);
 	find_player_position(data->m, &player_y, &player_x);
-	map_copy = copy_map(data->m);
-	flood_fill(map_copy, player_y, player_x);
+	map_copy = copy_map(data->m, data);
+	flood_fill(map_copy, player_y, player_x, data);
 	return (data);
 }

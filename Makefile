@@ -1,12 +1,11 @@
 NAME	= cub3D
 BONUS_NAME = cub3D_bonus
-CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -O3 -g
+CFLAGS	= -Wextra -Wall  -Wunreachable-code -O3 -g
 LIBMLX	= ./MLX42
 LIBFT = ./libft
 
 HEADERS = -I ./include -I $(LIBMLX)/include -I $(LIBMLX) $(INCLUDES)
-LDFLAGS = -L/usr/local/lib
-LDFLAGS += -fsanitize=address
+LDFLAGS = -L/opt/homebrew/lib
 INCLUDES = -I/opt/homebrew/include
 LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm $(LIBFT)/libft.a $(LDFLAGS)
 
@@ -20,7 +19,7 @@ SRC	= 	$(SRC_DIR)/main.c $(SRC_DIR)/parsing/file_parsing.c $(SRC_DIR)/parsing/ut
 		$(SRC_DIR)/parsing/map_parsing_util.c $(SRC_DIR)/init/init.c $(SRC_DIR)/moves/move_player.c \
 		$(SRC_DIR)/ray_caster/cast_rays.c $(SRC_DIR)/ray_caster/minimap.c $(SRC_DIR)/ray_caster/minimap_rays.c \
 		$(SRC_DIR)/ray_caster/textures.c  $(SRC_DIR)/parsing/flood_fill.c $(SRC_DIR)/ray_caster/cast_rays2.c \
-		$(SRC_DIR)/moves/keycallback.c $(SRC_DIR)/init/init_helper.c
+		$(SRC_DIR)/moves/keycallback.c $(SRC_DIR)/init/init_helper.c $(SRC_DIR)/parsing/ft_split_plus.c
 
 OBJ	= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
@@ -29,7 +28,8 @@ BNS_SRC	= 	$(BNS_SRC_DIR)/main.c $(BNS_SRC_DIR)/parsing/file_parsing_bonus.c $(B
 			$(BNS_SRC_DIR)/parsing/map_parsing_util_bonus.c $(BNS_SRC_DIR)/init/init_bonus.c $(BNS_SRC_DIR)/moves/move_player_bonus.c \
 			$(BNS_SRC_DIR)/ray_caster/cast_rays_bonus.c $(BNS_SRC_DIR)/ray_caster/minimap_bonus.c $(BNS_SRC_DIR)/ray_caster/textures_bonus.c \
 			$(BNS_SRC_DIR)/parsing/flood_fill_bonus.c $(BNS_SRC_DIR)/ray_caster/minimap_rays_bonus.c $(BNS_SRC_DIR)/ray_caster/helper_bonus.c \
-			$(BNS_SRC_DIR)/ray_caster/cast_rays2_bonus.c $(BNS_SRC_DIR)/moves/keycallback_bonus.c $(BNS_SRC_DIR)/init/init_helper_bonus.c
+			$(BNS_SRC_DIR)/ray_caster/cast_rays2_bonus.c $(BNS_SRC_DIR)/moves/keycallback_bonus.c $(BNS_SRC_DIR)/init/init_helper_bonus.c \
+			$(BNS_SRC_DIR)/parsing/ft_split_plus.c
 
 BNS_OBJ	= $(patsubst $(BNS_SRC_DIR)/%.c, $(BNS_OBJ_DIR)/%.o, $(BNS_SRC))
 
