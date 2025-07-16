@@ -1,4 +1,4 @@
-F 15,27,1
+F 15,     27,1
 C 123,123,123
 
 NO textures/scene1/1.png
@@ -6,7 +6,7 @@ SO textures/scene1/2.png
 WE textures/scene1/3.png
 EA textures/scene1/4.png
 
-1111111111111111111
+1111101111111111111
 10W1001001001000001
 1011000001000001001
 1D110011D1111101111

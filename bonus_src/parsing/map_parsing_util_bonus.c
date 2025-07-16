@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/23 18:46:54 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/26 20:42:40 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void rgb_range_checker(char *row, int f_or_c, t_data **data)
 
 	while (*row == 'F' || *row == 'C' || *row == ' ')
 		row++;
-	gc_track(split = ft_split(row, ','));
+	gc_track(split = ft_split_plus(row, ", n\r"));
 	i = -1;
 	while (split[++i])
 	{

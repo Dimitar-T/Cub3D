@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:50:03 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/23 18:44:27 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/26 21:23:57 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void	check_config(char *row, t_data **data)
 	temp = ft_strjoin("Error: the following line isn't valid: ", row);
 	gc_track(temp);
 	if (is_a_key == false)
-		exit_fail(temp, NULL);
+		exit_fail(temp, *data);
 }
 
-static char	**extract_map_only(char **map, int start_index)
+static char	**extract_map_only(char **map, int start_index, t_data *data)
 {
 	int		count;
 	int		i;
@@ -53,7 +53,7 @@ static char	**extract_map_only(char **map, int start_index)
 			count++;
 	gc_track(map_only = ft_calloc(count + 1, sizeof(char *)));
 	if (!map_only)
-		exit_fail("Cub3D: Failed to allocate memory for map\n", NULL);
+		exit_fail("Cub3D: Failed to allocate memory for map\n", data);
 	i = start_index - 1;
 	count = -1;
 	while (map[++i])
@@ -62,7 +62,7 @@ static char	**extract_map_only(char **map, int start_index)
 		{
 			map_only[++count] = ft_strdup(map[i]);
 			if (map_only[count] == NULL)
-				exit_fail("Cub3D: Failed to allocate memory for map\n", NULL);
+				exit_fail("Cub3D: Failed to allocate memory for map\n", data);
 			gc_track(map_only[count]);
 		}
 	}
@@ -87,10 +87,10 @@ static char	**configuration(char **map, t_data **data)
 		|| (*data)->te == NULL)
 		exit_fail("init: mlx failed to load png", *data);
 	check_for_dup(data);
-	return (extract_map_only(map, i));
+	return (extract_map_only(map, i, *data));
 }
 
-static void	check_for_valid_chars(char **map)
+static void	check_for_valid_chars(char **map, t_data *data)
 {
 	int	player;
 	int	i;
@@ -104,16 +104,14 @@ static void	check_for_valid_chars(char **map)
 		while (map[i][++y])
 		{
 			if (!ft_strchr("01NSEWD ", map[i][y]))
-				exit_fail("Cub3D: Error invalid character found in map\n",
-					NULL);
+				exit_fail("Cub3D: Error invalid character found in map\n", data);
 			if (ft_strchr("NSEW", map[i][y]))
 				player++;
 		}
 	}
 	if (player != 1)
 		exit_fail("Cub3D: Error the map needs to conatin exactlly one "
-			"player position\n",
-			NULL);
+			"player position\n", data);
 }
 
 t_data	*map_parsing(char **map)
@@ -128,7 +126,7 @@ t_data	*map_parsing(char **map)
 		exit_fail("Cub3D: Error memory allocation failed!\n", NULL);
 	gc_track(data);
 	data->m = configuration(map, &data);
-	check_for_valid_chars(data->m);
+	check_for_valid_chars(data->m, data);
 	find_player_position(data->m, &player_y, &player_x);
 	map_copy = copy_map(data->m);
 	flood_fill(map_copy, player_y, player_x);

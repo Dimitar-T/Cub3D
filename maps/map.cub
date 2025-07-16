@@ -1,9 +1,9 @@
-NO textures/scene1/1.png
+NO       textures/scene1/1.png   
 SO textures/scene1/2.png
 WE textures/scene1/3.png
-EA textures/scene1/4.png
+EA textures/scene1/4.png   
 
-F 205,45,249
+F    205,    45,249          
 C 223,239,251
 
 111111111111111111111111111   

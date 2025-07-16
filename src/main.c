@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:25:35 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/22 18:07:32 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 12:32:17 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,17 @@ static void	strip_trailing_newlines(char **map)
 	}
 }
 
+void at_exit(void)
+{
+	system("leaks cub3D");
+}
+
 int	main(int argc, char **argv)
 {
 	char	**map;
 	t_data	*game;
 
+	atexit(at_exit);
 	ft_arguments_checker(argc);
 	map = file_parsing(argv);
 	strip_trailing_newlines(map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/06/22 17:25:35 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:52:53 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+	
+char	**ft_split_plus(char *str, char *charset);
 void	check_for_dup(t_data **data);
 char	**copy_map(char **original);
 void	find_player_position(char **map, int *out_y, int *out_x);

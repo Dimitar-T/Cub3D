@@ -6,7 +6,7 @@
 /*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/23 18:47:50 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/06/26 21:22:26 by dtrendaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	rgb_range_checker(char *row, int f_or_c, t_data **data)
 
 	while (*row == 'F' || *row == 'C' || *row == ' ')
 		row++;
-	split = ft_split(row, ',');
-	gc_track(split);
+	gc_track(split = ft_split_plus(row, ", n\r"));
 	i = -1;
 	while (split[++i])
 	{
@@ -85,19 +84,24 @@ static int	valid_texture_extention(char *filename)
 
 void	validate_texture_path(char *path, char *key, t_data **data)
 {
-	if (valid_texture_extention(path) == false)
-		exit_fail("Cub3D: Error texture is not in a valid format\n", *data);
-	while (*path == ' ')
-		path++;
+	char *trimmed_path;
+	
 	if (!path || ft_strlen(path) == 0)
 		exit_fail("Cub3D: Empty texture path\n", *data);
-	get_fd(path);
+	trimmed_path = ft_strtrim(path, " \r");
+	if (trimmed_path == NULL)
+		exit_fail("Cub3D: Error malloc failed!\n", *data);
+	gc_track(trimmed_path);
+	printf("debug: %s\n", trimmed_path);
+	if (valid_texture_extention(trimmed_path) == false)
+		exit_fail("Cub3D: Error texture is not in a valid format\n", *data);
+	get_fd(trimmed_path);
 	if (key[0] == 'E')
-		(*data)->te = mlx_load_png(path);
+		(*data)->te = mlx_load_png(trimmed_path);
 	else if (key[0] == 'W')
-		(*data)->tw = mlx_load_png(path);
+		(*data)->tw = mlx_load_png(trimmed_path);
 	else if (key[0] == 'S')
-		(*data)->ts = mlx_load_png(path);
+		(*data)->ts = mlx_load_png(trimmed_path);
 	else if (key[0] == 'N')
-		(*data)->tn = mlx_load_png(path);
+		(*data)->tn = mlx_load_png(trimmed_path);
 }
