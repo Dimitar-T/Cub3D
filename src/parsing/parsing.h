@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:36:05 by dimitrendaf       #+#    #+#             */
-/*   Updated: 2025/07/16 14:04:59 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:06:55 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-	
+
 char	**ft_split_plus(char *str, char *charset);
 void	check_for_dup(t_data **data);
 char	**copy_map(char **original, t_data *game);

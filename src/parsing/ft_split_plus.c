@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_plus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:47:55 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/06/26 15:52:40 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:06:30 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int		is_charset(char c, char *charset);
 int		ft_count_char(char *str, char *charechter);
@@ -49,15 +49,15 @@ char	**ft_split_plus(char *str, char *charset)
 // 	char string[] = ",apple ,,,banana,,cherry,date,";
 // 	char separeter = ',';
 // 	char **result = ft_split(string, &separeter);
-// 	    int i = 0;
+// 		 int i = 0;
 //     while (result[i] != NULL)
 //     {
 //         printf("%s\n", result[i]);
-//         free(result[i]); 
+//         free(result[i]);
 //         i++;
 //     }
 //     free(result);
-//     return 0;
+//     return (0);
 // }
 
 int	ft_count_char(char *str, char *charechter)

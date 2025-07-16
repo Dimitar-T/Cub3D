@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtrendaf <dtrendaf@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jwardeng <jwardeng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:35:35 by dtrendaf          #+#    #+#             */
-/*   Updated: 2025/07/16 14:07:42 by dtrendaf         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:06:43 by jwardeng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-/// @brief the + 255 is for A(saturation) in RGBA 
+/// @brief the + 255 is for A(saturation) in RGBA
 /// @param f_or_c floor or ceiling
 /// @param data data
 /// @param index which digit is getting passed
 /// @param value the digit
-static void set_rgb(int f_or_c, t_data **data, int index, int value)
+static void	set_rgb(int f_or_c, t_data **data, int index, int value)
 {
 	if (f_or_c == 1)
 	{
@@ -64,7 +64,7 @@ void	rgb_range_checker(char *row, int f_or_c, t_data **data)
 	}
 	if (!split || split[0] == NULL || split[1] == NULL || split[2] == NULL
 		|| split[3] != NULL)
-		exit_fail("Cub3D: RGB must be 3 numbers separated by 2 ,\n",*data);
+		exit_fail("Cub3D: RGB must be 3 numbers separated by 2 ,\n", *data);
 }
 
 static int	valid_texture_extention(char *filename)
@@ -84,8 +84,8 @@ static int	valid_texture_extention(char *filename)
 
 void	validate_texture_path(char *path, char *key, t_data **data)
 {
-	char *trimmed_path;
-	
+	char	*trimmed_path;
+
 	if (!path || ft_strlen(path) == 0)
 		exit_fail("Cub3D: Empty texture path\n", *data);
 	trimmed_path = ft_strtrim(path, " \r");
